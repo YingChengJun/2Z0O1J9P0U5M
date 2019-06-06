@@ -4,13 +4,13 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let session = require('express-session'); 
-//let paymentProcessRouter = require('./routes/paymentProcess');  
+//============================================================
 let exampleRouter = require('./routes/example'); //样例路由
-let pmtprocessRouter = require('./routes/pmtprocess'); //支付处理路由
+let paymentRouter = require('./routes/payment'); //支付处理路由
+//============================================================
 
 let app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -25,23 +25,49 @@ app.use(session({secret: 'recommand 128 bytes random string', // 建议使用 12
 }));  //这些是写在app.js里面的    
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/example', exampleRouter);   //样例路由
-app.use('/payment', pmtprocessRouter);   //样例路由
+//============================================================
+app.use('/example', exampleRouter);
+app.use('/payment', paymentRouter);
+//============================================================
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
-// error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
+	res.status(err.status || 500);
+	res.render('error');
 });
+
+
+//====================可在ejs模板中使用的函数====================
+Date.prototype.format = function(fmt) { 
+    var o = { 
+        "M+" : this.getMonth()+1,                 //月份 
+        "d+" : this.getDate(),                    //日 
+        "h+" : this.getHours(),                   //小时 
+        "m+" : this.getMinutes(),                 //分 
+        "s+" : this.getSeconds(),                 //秒 
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+        "S"  : this.getMilliseconds()             //毫秒 
+    }; 
+    if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+    }
+    for(var k in o) {
+        if(new RegExp("("+ k +")").test(fmt)){
+             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        }
+    }
+    return fmt; 
+}
+
+app.locals.dateFormat = function(dateStr) {
+    let date = new Date(dateStr);
+    return date.format('yyyy-MM-dd hh:mm:ss');
+}
+//============================================================
 
 module.exports = app;
