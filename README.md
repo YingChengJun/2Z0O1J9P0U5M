@@ -1,5 +1,3 @@
 # 2019-ZJU-SE-OnlinePaymentSystem
 
-
-###提示
-#####先看example
+### 提示：先看example示例代码
