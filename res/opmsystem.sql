@@ -4,37 +4,16 @@ Navicat MySQL Data Transfer
 Source Server         : localhost_3306
 Source Server Version : 50505
 Source Host           : localhost:3306
-Source Database       : opm
+Source Database       : opmsystem
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-06-06 10:36:01
+Date: 2019-06-07 12:42:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `aftersale_record`
--- ----------------------------
-DROP TABLE IF EXISTS `aftersale_record`;
-CREATE TABLE `aftersale_record` (
-  `order_id` varchar(20) NOT NULL,
-  `complain` varchar(500) NOT NULL,
-  `submit_time` datetime NOT NULL,
-  `response` varchar(500) DEFAULT NULL,
-  `reponder_id` int(11) DEFAULT NULL,
-  `reply_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `reponder_id` (`reponder_id`),
-  CONSTRAINT `aftersale_record_ibfk_1` FOREIGN KEY (`reponder_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `aftersale_record_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order_form` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of aftersale_record
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `deal_record`
@@ -150,7 +129,11 @@ CREATE TABLE `order_form` (
   `receive_adr` varchar(200) NOT NULL,
   `current_status` int(1) NOT NULL,
   `created_time` datetime NOT NULL,
+  `refund_reason` varchar(200) DEFAULT NULL,
   `refund_time` datetime DEFAULT NULL,
+  `refund_status` int(1) NOT NULL DEFAULT '0',
+  `complain` varchar(500) DEFAULT NULL,
+  `complain_time` datetime DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `seller_id` (`seller_id`),
   KEY `buyer_id` (`buyer_id`),
@@ -161,6 +144,36 @@ CREATE TABLE `order_form` (
 -- ----------------------------
 -- Records of order_form
 -- ----------------------------
+INSERT INTO `order_form` VALUES ('201906068003', '2', '1', '商务大床房7.1~7.2', '200', '', '0', '2019-06-07 12:41:11', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068004', '2', '1', '商务大床房7.2~7.3', '201', '', '1', '2019-06-07 12:41:11', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068005', '2', '1', '商务大床房7.3~7.4', '202', '', '2', '2019-06-07 12:41:11', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068006', '2', '1', '商务大床房7.4~7.5', '203', '', '3', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068007', '2', '1', '商务大床房7.5~7.6', '204', '', '4', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068008', '2', '1', '商务大床房7.6~7.7', '205', '', '5', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068009', '2', '1', '商务大床房7.7~7.8', '206', '', '0', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068010', '2', '1', '商务大床房7.8~7.9', '207', '', '1', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068011', '2', '1', '商务大床房7.9~7.10', '208', '', '2', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068012', '2', '1', '商务大床房7.10~7.11', '209', '', '3', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068013', '2', '1', '商务大床房7.11~7.12', '210', '', '4', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068014', '2', '1', '商务大床房7.12~7.13', '211', '', '5', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068015', '2', '1', '商务大床房7.13~7.14', '212', '', '0', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068016', '2', '1', '商务大床房7.14~7.15', '213', '', '1', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068017', '2', '1', '商务大床房7.15~7.16', '214', '', '2', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068018', '2', '1', '商务大床房7.16~7.17', '215', '', '3', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068019', '2', '1', '商务大床房7.17~7.18', '216', '', '4', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068020', '2', '1', '商务大床房7.18~7.19', '217', '', '5', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068021', '2', '1', '商务大床房7.19~7.20', '218', '', '0', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068022', '2', '1', '商务大床房7.20~7.21', '219', '', '1', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068023', '2', '1', '商务大床房7.21~7.22', '220', '', '2', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068024', '2', '1', '商务大床房7.22~7.23', '221', '', '3', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068025', '2', '1', '商务大床房7.23~7.24', '222', '', '4', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068026', '2', '1', '商务大床房7.24~7.25', '223', '', '5', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068027', '2', '1', '商务大床房7.25~7.26', '224', '', '0', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068028', '2', '1', '商务大床房7.26~7.27', '225', '', '1', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068029', '2', '1', '商务大床房7.27~7.28', '226', '', '2', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068030', '2', '1', '商务大床房7.28~7.29', '227', '', '3', '2019-06-07 12:41:12', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068031', '2', '1', '商务大床房7.29~7.30', '228', '', '4', '2019-06-07 12:41:13', null, null, '0', null, null);
+INSERT INTO `order_form` VALUES ('201906068032', '2', '1', '商务大床房7.30~7.31', '229', '', '5', '2019-06-07 12:41:13', null, null, '0', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_statistics`
@@ -197,8 +210,10 @@ CREATE TABLE `user` (
   `balance` decimal(19,2) DEFAULT NULL COMMENT '余额',
   `payPassword` varchar(32) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '支付密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('1', '嘤嘤嘤菜鸡', '123', '嘤菜鸡', '88888888', '1999-07-', '', '', '1', '2500.00', 'httnb');
+INSERT INTO `user` VALUES ('2', '锦江之星大酒店', '123', '胡图图', null, null, null, null, '2', '3000.00', 'zjynb');
