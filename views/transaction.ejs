@@ -37,9 +37,15 @@
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
   <!-- END Custom CSS-->
+  <style type="text/css">
+    .cursor {
+      cursor: pointer;
+    }
+  </style>>
 </head>
-<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
 
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
   <!-- - var navbarCustom = "navbar-fixed-top navbar-semi-dark navbar-shadow"-->
   <!-- navbar-fixed-top-->
   <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
@@ -94,27 +100,27 @@
     <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-xs-12 mb-1">
-          <ul class="nav nav-tabs nav-left" style="height: 95px;">
+          <ul class="nav nav-tabs nav-left" style="height: 50px;">
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab6" href="./payment?selector=6">全部订单</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab6" href="/payment?selector=6">全部订单</a>
             </li>
             <li class="nav-item hidden-xs">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab0" href="./payment?selector=0">待付款</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab0" href="/payment?selector=0">待付款</a>
             </li>
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab1" href="./payment?selector=1">待发货</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab1" href="/payment?selector=1">待发货</a>
             </li>
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab2" href="./payment?selector=2">待收货</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab2" href="/payment?selector=2">待收货</a>
             </li>
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab3" href="./payment?selector=3">退款中</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab3" href="/payment?selector=3">已完成</a>
             </li>
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab4" href="./payment?selector=4">已完成</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab4" href="/payment?selector=4">退款中</a>
             </li>
             <li class="nav-item">
-              <a class="text-success nav-link" id="baseVerticalLeft-tab5" href="./payment?selector=5">已关闭</a>
+              <a class="text-success nav-link" id="baseVerticalLeft-tab5" href="/payment?selector=5">已关闭</a>
             </li>
           </ul>
         </div>
@@ -128,7 +134,7 @@
       </div>
       <div class="content-body"><!-- Overview -->
         <% for (var i = 0; i < details.length; i++) { %>
-          <div class="card current_status_<%= i %>">
+          <div class="card">
             <div class="card-header">
               <h4 class="card-title"><%= details[i].seller_name %></h4>
               <div class="heading-elements">
@@ -146,7 +152,7 @@
                   <% } else if (details[i].current_status == 5) { %>
                     <li>已关闭&nbsp &nbsp &nbsp</li>
                   <% } %>
-                  <span class="tag tag-pill tag-success">查看详情</span>
+                  <span class="tag tag-pill tag-default">查看详情</span>
                 </ul>
               </div>
             </div>
@@ -174,8 +180,34 @@
             </div>
             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
               <span class="tags float-xs-right">
-                <span class="tag tag-pill tag-success">确认收货</span>
-                <span class="tag tag-pill tag-warning"><a href="refund.html">申请退款</a></span>
+                <% if (details[i].current_status == 0) { %>
+                  <form action="/payment/todoPayment" method="post" style="float: left">
+                    <span class="tag tag-pill tag-success">前往付款</span>
+                    <input type="hidden" name="pos" value="<%= i %>" />
+                  </form>
+                  <form action="/payment/cancelOrder" method="post" style="float: right;">
+                    <span class="tag tag-pill tag-warning cursor cancel_order">取消订单</span>
+                    <input type="hidden" name="pos" value="<%= i %>" />
+                  </form>
+                <% } %>
+                <% if (details[i].current_status == 2) { %>
+                  <form action="/payment/confirmReceived" method="post">
+                    <span class="tag tag-pill tag-infoza cursor confirm_received">确认收货</span>
+                    <input type="hidden" name="pos" value="<%= i %>" />
+                  </form>
+                <% } %>
+                <% if (details[i].current_status == 3) { %>
+                  <form action="/payment/applyRefund" method="post">
+                    <span class="tag tag-pill tag-warning cursor apply_refund">申请退款</span>
+                    <input type="hidden" name="pos" value="<%= i %>" />
+                  </form>
+                <% } %>
+                <% if (details[i].current_status == 4) { %>
+                  <form action="/payment/cancelRefund" method="post">
+                    <span class="tag tag-pill tag-danger cursor cancel_refund">取消退款</span>
+                    <input type="hidden" name="pos" value="<%= i %>" />
+                  </form>
+                <% } %>
               </span>
             </div>
           </div>
@@ -205,12 +237,23 @@
     <script src="../app-assets/vendors/js/ui/affix.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
+    <!--   [注]：实际使用时要把这段js代码藏好！虽然我在后端进行了二次检测数据是否被篡改。 -->
     <script type="text/javascript">
       $(function(){
         $("#baseVerticalLeft-tab<%= selector %>").addClass("active");
       });
+      $(".cancel_order").click(function(){
+        if (confirm("确认取消订单吗，一旦取消将不可恢复！")) {
+          $(this).parents("form").submit();
+        }
+      });
+      $(".cancel_refund").click(function(){
+        if (confirm("确认取消退款吗？")) {
+          $(this).parents("form").submit();
+        }
+      });
     </script>
-
+    <!-- 这段js代码放这主要是为了方便大家参考逻辑 -->
 
   </body>
   </html>

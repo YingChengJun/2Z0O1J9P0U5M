@@ -17,4 +17,17 @@ utils.formatDate = (date) => {
 	return  y  +  '-'  +  m  +  '-'  +  d + ' ' + h + ':' + minute + ":" + second;
 }
 
+
+//随机字符串
+utils.randomString = (len) => {
+　　len = len || 32;
+　　let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+　　let maxPos = $chars.length;
+　　let pwd = '';
+　　for (i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　return pwd;
+}
+
 module.exports = utils;
