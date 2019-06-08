@@ -99,7 +99,7 @@
   <div class="app-content content container-fluid">
     <div class="content-wrapper">
       <div class="content-header row">
-        <div class="content-header-left col-md-6 col-xs-12 mb-1">
+        <div class="content-header-left col-md-10 col-xs-12 mb-1">
           <ul class="nav nav-tabs nav-left" style="height: 50px;">
             <li class="nav-item">
               <a class="text-success nav-link" id="baseVerticalLeft-tab6" href="/payment?selector=6">全部订单</a>
@@ -122,9 +122,21 @@
             <li class="nav-item">
               <a class="text-success nav-link" id="baseVerticalLeft-tab5" href="/payment?selector=5">已关闭</a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">时间范围</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>" >所有</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=1">今天</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=2">本周</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=3">本月</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=4">近三年月</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=5">今年</a>
+                <a class="dropdown-item" href="/payment?selector=<%= selector %>&timerange=6">更早</a>
+              </div>
+            </li>
           </ul>
         </div>
-        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-xs-12">
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-2 col-xs-12">
           <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
               <li class="breadcrumb-item active">订单总数：<%= length %>条</li>
@@ -133,6 +145,18 @@
         </div>
       </div>
       <div class="content-body"><!-- Overview -->
+        <% if (length == 0) { %>
+          <div class="card-block">
+            <div class="row">
+                <div class="alert alert-info alert-dismissible fade in mb-2" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong>提示：这里一条记录也没有哦！</strong>
+                </div>
+            </div>
+          </div>
+        <% } %>
         <% for (var i = 0; i < details.length; i++) { %>
           <div class="card">
             <div class="card-header">
