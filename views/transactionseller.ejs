@@ -206,7 +206,7 @@
             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
               <span class="tags float-xs-right">
                 <% if (details[i].current_status == 1) { %>
-                  <form action="/payment/" method="post">
+                  <form action="/payment/confirmShipment" method="post">
                     <span class="tag tag-pill tag-info cursor confirmed">确认发货</span>
                     <input type="hidden" name="pos" value="<%= i %>" />
                   </form>
@@ -250,13 +250,8 @@
       $(function(){
         $("#baseVerticalLeft-tab<%= selector %>").addClass("active");
       });
-      $(".cancel_order").click(function(){
-        if (confirm("确认取消订单吗，一旦取消将不可恢复！")) {
-          $(this).parents("form").submit();
-        }
-      });
-      $(".cancel_refund").click(function(){
-        if (confirm("确认取消退款吗？")) {
+      $(".confirmed").click(function(){
+        if (confirm("确认已经发货了吗？")) {
           $(this).parents("form").submit();
         }
       });

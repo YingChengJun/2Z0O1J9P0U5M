@@ -232,6 +232,24 @@ exported.confirm_refund = async(req, res, callback) => {
 }
 
 //卖家确认发货
+exported.confirm_shipment = async(req, res, callback) => {
+	if (req.session.details[req.body.pos].current_status != 1) {
+		callback("invalid position!", undefined);
+		return;
+	}
+	const conn = await pool.getConnection();
+	try {
+		let {order_id, seller_id} = req.session.details[req.body.pos];
+		let sql = "update order_form set current_status = 2 where order_id = ? and seller_id = ?";	
+		await conn.query(sql, [order_id, seller_id]);
+		callback(undefined, "confirm_ok");
+	} catch (err) {
+		console.log(err);
+		callback(err, undefined);
+	} finally {
+		if (conn) conn.release();
+	}
+}
 
 
 //投诉

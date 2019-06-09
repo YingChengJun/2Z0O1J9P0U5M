@@ -124,7 +124,6 @@ router.post('/confirmRefund', (req, res) => {
 		return;
 	}
 	req.body.pos = valid_check(req.body.pos);
-	console.log(req.body.pos);
 	if (!req.body.pos) {
 		res.send({status:500}).end();
 		return;
@@ -135,6 +134,23 @@ router.post('/confirmRefund', (req, res) => {
 			res.send({status:500}).end();
 		} else {
 			res.send({status:200});
+		}
+	});
+});
+
+router.post('/confirmShipment', (req, res) => {
+	//for developer to test
+	req.session.token = token;
+	//--------------------------
+	if (!req.session.token) {
+		console.log("登录态过期，请重新登录！");
+		return;
+	}
+	pmodel.confirm_shipment(req, res, (err, ret) => {
+		if (err) {
+			res.send("<script>alert('确认发货失败!'); self.location = document.referrer;</script>").end();
+		} else {
+			res.send("<script>alert('确认发货成功!'); self.location = document.referrer;</script>");
 		}
 	});
 });
@@ -203,9 +219,9 @@ router.get('/orderInfo', (req, res) => {
 
 });
 
-router.get('/captcha', (req, res) => {
+router.get('/captcha', (req, res) => { 
 	let captcha = svgCaptcha.create();
-	req.session.captcha = captcha.text;
+	req.session.captcha = captcha.text; //生成动态码存到session中并返回给前端
 	res.type('svg');
 	res.status(200).send(captcha.data);
 });
@@ -214,7 +230,7 @@ router.post('/captcha', (req, res) => {
 	if (!req.session.captcha || req.session.captcha != req.body.dynamic) {
 		res.send({status:500}).end();  //错误验证码
 	} else {
-		res.send({status:200}).end();  //错误验证码
+		res.send({status:200}).end();  //正确验证码
 		console.log("PWD="+req.body.paypwd);
 	}
 });
