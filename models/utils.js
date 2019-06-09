@@ -30,4 +30,5 @@ utils.randomString = (len) => {
 　　return pwd;
 }
 
+
 module.exports = utils;

@@ -4,6 +4,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let session = require('express-session'); 
+let encrypt = require('./models/encrypt.js');
 //============================================================
 let exampleRouter = require('./routes/example'); //样例路由
 let paymentRouter = require('./routes/payment'); //支付处理路由
@@ -68,6 +69,9 @@ app.locals.dateFormat = function(dateStr) {
     let date = new Date(dateStr);
     return date.format('yyyy-MM-dd hh:mm:ss');
 }
+
+app.locals.compileStr = encrypt.base64encode;
+
 //============================================================
 
 module.exports = app;

@@ -60,11 +60,10 @@
         <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
           <ul class="nav navbar-nav">
             <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
-            <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
           </ul>
           <ul class="nav navbar-nav float-xs-right">
-            <li class="nav-item"><a href="regis.html" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>注销</a></li>
-            <li class="nav-item"><a href="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>我的</a></li>
+            <li class="nav-item"><a href="" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>注销</a></li>
+            <li class="nav-item"><a href="" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>我的</a></li>
           </ul>
         </div>
       </div>
@@ -84,7 +83,7 @@
         <li class=" nav-item">
           <a href=""><i class="icon-home3"></i><span data-i18n="" class="menu-title">我的账户</span></a>
         </li>
-        <li class=" nav-item"><a href=""><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">在线预定</span></a>
+        <li class="nav-item"><a href=""><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">在线预定</span></a>
         </li>
         <li class="active"><a href=""><i class="icon-folder3"></i><span data-i18n="" class="menu-title">我的订单</span></a>
         </li>
@@ -176,7 +175,7 @@
                   <% } else if (details[i].current_status == 5) { %>
                     <li>已关闭&nbsp &nbsp &nbsp</li>
                   <% } %>
-                  <span class="tag tag-pill tag-default">查看详情</span>
+                  <a href="/payment/orderinfo?oid=<%= compileStr('YCJ20190608' + details[i].order_id) %>&session=<%= compileStr('YCJ20190608' + i) %>" ><span class="tag tag-pill tag-default">查看详情</span></a>
                 </ul>
               </div>
             </div>
@@ -185,12 +184,14 @@
                 <div class="table-responsive" >
                   <table class="table table-hover table-striped">
                     <tbody>
+                      <th>订单号</th>
                       <th>订单内容</th>
                       <th class="hidden-xs">订单价格</th>
                       <th>下单时间</th>
                       <th>买方</th>
                       <th>卖方</th>
                       <tr>
+                        <td><%= details[i].order_id %></td>
                         <td><%= details[i].goods_name %></td>
                         <td class="hidden-xs"><%= details[i].price %></td>
                         <td><%= dateFormat(details[i].created_time) %></td>
@@ -205,10 +206,9 @@
             <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
               <span class="tags float-xs-right">
                 <% if (details[i].current_status == 0) { %>
-                  <form action="/payment/todoPayment" method="post" style="float: left">
+                  <a href="/payment/orderinfo?oid=<%= compileStr('YCJ20190608' + details[i].order_id) %>&session=<%= compileStr('YCJ20190608' + i) %>" style="float: left">
                     <span class="tag tag-pill tag-success">前往付款</span>
-                    <input type="hidden" name="pos" value="<%= i %>" />
-                  </form>
+                  </a>
                   <form action="/payment/cancelOrder" method="post" style="float: right;">
                     <span class="tag tag-pill tag-warning cursor cancel_order">取消订单</span>
                     <input type="hidden" name="pos" value="<%= i %>" />
@@ -221,10 +221,7 @@
                   </form>
                 <% } %>
                 <% if (details[i].current_status == 3) { %>
-                  <form action="/payment/applyRefund" method="post">
-                    <span class="tag tag-pill tag-warning cursor apply_refund">申请退款</span>
-                    <input type="hidden" name="pos" value="<%= i %>" />
-                  </form>
+                  <a href="/payment/orderinfo?oid=<%= compileStr('YCJ20190608' + details[i].order_id) %>&session=<%= compileStr('YCJ20190608' + i) %>"><span class="tag tag-pill tag-info">申请退款</span></a>
                 <% } %>
                 <% if (details[i].current_status == 4) { %>
                   <form action="/payment/cancelRefund" method="post">
