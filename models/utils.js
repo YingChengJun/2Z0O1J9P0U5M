@@ -30,5 +30,23 @@ utils.randomString = (len) => {
 　　return pwd;
 }
 
+//生成交易流水号
+utils.createDealRecord = () => {
+	const now = new Date();
+	let month = now.getMonth() + 1;
+	let day = now.getDate();
+	let hour = now.getHours();
+	let minutes = now.getMinutes();
+	let seconds = now.getSeconds();
+	month = month < 10 ? ('0' + month) : month;
+	day = day < 10 ? ('0' + day) : day;
+	hour = hour < 10 ? ('0' + hour) : hour;
+	minutes = minutes < 10 ? ('0' + minutes) : minutes;
+	seconds = seconds < 10 ? ('0' + seconds) : seconds;
+	let res = now.getFullYear().toString() + month.toString() + day + hour + 
+		minutes + seconds + (Math.round(Math.random() * 23 + 100)).toString();
+	return res;
+}
+
 
 module.exports = utils;

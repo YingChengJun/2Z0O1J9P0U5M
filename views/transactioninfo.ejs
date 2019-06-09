@@ -183,7 +183,7 @@
           </div>
         </div>
 
-        <% if (details.refund_status == 0) { %>
+        <% if (details.current_status == 0) { %>
         <div class="card">
         	<div class="card-body">
         		<div class="card-header">
@@ -294,17 +294,24 @@
   			url: "/payment/captcha",
   			data: {
   				dynamic: $("input[name='dynamic']").val(),
-  				paypwd: $("input[name='paypwd']").val()
+  				paypwd: $("input[name='paypwd']").val(),
+          order_id: <%= details.order_id %>  //不能加密，防止其他人得到加密方式，明文后端二次确认即可
   			},
   			dataType: "JSON",
   			success: function(data){
   				if (data.status == 500) {
+            alert("验证码不对哦！");
   					$("img").attr('src','/payment/captcha?'+Math.random()); //更换验证码
   					$("input[name='dynamic']").val("");
   					$("input[name='paypwd']").val("");
-  				} else {
-  					alert("ok!")
-  				}
+  				} else if (data.status == 502) {
+  					alert("支付密码错误!")
+  				} else if (data.status == 200) {
+            alert("支付成功，当前余额：" + data.balance);
+            location.reload();
+          } else {
+            alert("其他错误，请联系系统管理员！");
+          }
         }
   		});
   	});

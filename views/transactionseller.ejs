@@ -211,10 +211,7 @@
                     <input type="hidden" name="pos" value="<%= i %>" />
                   </form>
                 <% } else if (details[i].current_status == 4) { %>
-                  <form action="/payment/" method="post">
-                    <a href="/payment/orderinfo?oid=<%= compileStr('YCJ20190608' + details[i].order_id) %>&session=<%= compileStr('YCJ20190608' + i) %>" ><span class="tag tag-pill tag-info">退款审核</span></a>
-                    <input type="hidden" name="pos" value="<%= i %>" />
-                  </form>   
+                  <a href="/payment/orderinfo?oid=<%= compileStr('YCJ20190608' + details[i].order_id) %>&session=<%= compileStr('YCJ20190608' + i) %>" ><span class="tag tag-pill tag-info">退款审核</span></a>
                 <% } %>
               </span>
             </div>

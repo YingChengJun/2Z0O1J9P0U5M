@@ -216,7 +216,7 @@
                 <% } %>
                 <% if (details[i].current_status == 2) { %>
                   <form action="/payment/confirmReceived" method="post">
-                    <span class="tag tag-pill tag-infoza cursor confirm_received">确认收货</span>
+                    <span class="tag tag-pill tag-success cursor confirm_received">确认收货</span>
                     <input type="hidden" name="pos" value="<%= i %>" />
                   </form>
                 <% } %>
@@ -270,6 +270,11 @@
       });
       $(".cancel_refund").click(function(){
         if (confirm("确认取消退款吗？")) {
+          $(this).parents("form").submit();
+        }
+      });
+      $(".confirm_received").click(function(){
+        if (confirm("确认收货吗？")) {
           $(this).parents("form").submit();
         }
       });

@@ -9,8 +9,8 @@ const SELLER = 2;
 const BUYER = 1;
 const token = {
 	username: '嘤菜鸡',
-	uid: '2',
-	typeOfUser: 2
+	uid: '1',
+	typeOfUser: 1
 }
 
 router.get('/', (req, res) => {
@@ -56,7 +56,23 @@ router.get('/', (req, res) => {
 			}
 		});	
 	}
+});
 
+router.post('/confirmReceived', (req, res) => {
+	//for developer to test
+	req.session.token = token;
+	//--------------------------
+	if (!req.session.token) {
+		console.log("登录态过期，请重新登录！");
+		return;
+	}
+	pmodel.confirm_received(req, res, (err, ret) => {
+		if (err) {
+			res.send("<script>alert('确认收货失败!'); self.location = document.referrer;</script>").end();
+		} else {
+			res.send("<script>alert('确认收货成功!'); self.location = document.referrer;</script>");
+		}
+	});
 });
 
 router.post('/cancelOrder', (req, res) => {
@@ -123,12 +139,12 @@ router.post('/confirmRefund', (req, res) => {
 		console.log("登录态过期，请重新登录！");
 		return;
 	}
+
 	req.body.pos = valid_check(req.body.pos);
 	if (!req.body.pos) {
 		res.send({status:500}).end();
 		return;
 	}
-	console.log("=======");
 	pmodel.confirm_refund(req, res, (err, ret) => {
 		if (err) {
 			res.send({status:500}).end();
@@ -191,7 +207,7 @@ router.get('/orderInfo', (req, res) => {
 		res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
 		return;
 	} else req.query.oid = deCode;
-	if (req.session.token == SELLER) {
+	if (req.session.token.typeOfUser == BUYER) {
 		pmodel.order_info(req, res, (err, ret) => {
 			if (err) {
 				res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
@@ -215,13 +231,13 @@ router.get('/orderInfo', (req, res) => {
 				});
 			}
 		});
-	}
-
+	} else res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
 });
 
 router.get('/captcha', (req, res) => { 
 	let captcha = svgCaptcha.create();
 	req.session.captcha = captcha.text; //生成动态码存到session中并返回给前端
+	console.log(req.session.captcha);
 	res.type('svg');
 	res.status(200).send(captcha.data);
 });
@@ -230,8 +246,13 @@ router.post('/captcha', (req, res) => {
 	if (!req.session.captcha || req.session.captcha != req.body.dynamic) {
 		res.send({status:500}).end();  //错误验证码
 	} else {
-		res.send({status:200}).end();  //正确验证码
-		console.log("PWD="+req.body.paypwd);
+		pmodel.payfor_orders(req, res, (err, ret) => {
+			if (err) {
+				res.send({status:err}).end();
+			} else {
+				res.send({status:200, balance: ret});
+			}
+		});
 	}
 });
 

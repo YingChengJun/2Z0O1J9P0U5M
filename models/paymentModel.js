@@ -2,6 +2,7 @@ const pool = require('./conn_pool');
 const utils = require('./utils');
 const randomName = require("chinese-random-name");
 const encrypt = require('../models/encrypt.js');
+const middle_id = "10086";  //交易中间账户
 let exported = {};
 
 //买家订单查询
@@ -118,21 +119,35 @@ exported.seller_order_info = async (req, res, callback) => {
 exported.payfor_orders = async(req, res, callback) => {
 	const conn = await pool.getConnection();
 	//Step0: 交易安全认证
-	
-
 	//Step1: 转账到中间账户
 	//Step2: 生成交易流水
 	await conn.beginTransaction();  //事务
 	try {
-
-
+		let sql = "select balance from user where id = ? and payPassword = ?";
+		let ret = await conn.query(sql , [req.session.token.uid, req.body.paypwd]);
+		if (ret[0].length != 1) throw "502";
+		let balance = ret[0][0].balance; //用户余额
+		sql = "select * from order_form where order_id = ? and buyer_id = ?"; //二次确认订单合法性
+		ret = await conn.query(sql , [req.body.order_id, req.session.token.uid]);
+		if (ret[0].length != 1) throw "invalid order"; //二次确认订单合法性
+		let {order_id, seller_id, buyer_id, price, current_status} = ret[0][0];
+		if (current_status != 0) throw "invalid order"; //二次确认订单合法性
+		if (balance - price < 0) throw "balance not adequate"; //余额不足
+		await conn.query("update user set balance = balance - ? where id = ?", [price, buyer_id]);
+		await conn.query("update user set balance = balance + ? where id = ?", [price, middle_id]);
+		await conn.query("update order_form set current_status = 1 where order_id = ?", [order_id]);  //更新订单状态
+		let deal_id = utils.createDealRecord();  //生成流水号
+		let param = [deal_id,order_id,buyer_id,middle_id,price];
+		await conn.query("insert into deal_record values (?,?,?,?,?,null,CURRENT_TIMESTAMP,0)", param);
+		callback(undefined, balance - price);
 		await conn.commit();
 	} catch (err) {
+		console.log(err);
 		await conn.rollback();  //数据库回滚
+		callback(err);
 	} finally {
 		if (conn) conn.release();
 	}
-	
 }
 
 //取消订单
@@ -158,7 +173,11 @@ exported.cancel_orders = async(req, res, callback) => {
 exported.apply_refund = async(req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		if (req.session.details[req.body.pos].current_status != 3) {
+		let cs = req.session.details[req.body.pos].current_status;
+		let rs = req.session.details[req.body.pos].refund_status;
+		//要么是已经处于完成状态的订单(3)，受理状态可以是(0)~(2)
+		//要么是正在退款(4)，但是没有被受理(1)
+		if ((cs != 3) && (cs != 4 || rs != 1)) {
 			callback("invalid position!", undefined);
 			return;
 		}
@@ -201,31 +220,46 @@ exported.cancel_refund = async(req, res, callback) => {
 	}
 }
 
-//卖家确认退款,需要再修改
+//卖家确认退款
 exported.confirm_refund = async(req, res, callback) => {
-	let obj = req.session.details[req.body.pos];
-	if ((obj.current_status != 4 && obj.current_status != 5) || obj.refund_status == 0) {
+	let cs = req.session.details[req.body.pos].current_status;
+	let rs = req.session.details[req.body.pos].refund_status;
+	if (!((cs == 4) && (rs == 1 || rs == 3) || ((cs == 5) && (rs == 3)))) {
 		callback("invalid position!", undefined);
 		return;
 	}
 	const conn = await pool.getConnection();
+	await conn.beginTransaction();  //事务
 	try {
 		let {order_id, seller_id} = req.session.details[req.body.pos];
 		let sql;
 		if (req.body.check == 1) {
-			sql = "update order_form set current_status = 5, refund_status = 2, refund_time = CURRENT_TIMESTAMP \
-			where order_id = ? and seller_id = ?";
+			let ret = await conn.query("select balance from user where id = ?;" , [req.session.token.uid]);
+			if (ret[0].length != 1) throw "502";
+			let balance = ret[0][0].balance; //用户余额
+			sql = "select * from order_form where order_id = ? and seller_id = ?"; //二次确认订单合法性
+			ret = await conn.query(sql , [order_id, req.session.token.uid]);
+			if (ret[0].length != 1) throw "invalid order"; //二次确认订单合法性
+			let {seller_id, buyer_id, price, current_status} = ret[0][0];
+			if (current_status != 4) throw "invalid status"; //二次确认订单合法性
+			if (balance - price < 0) throw "balance not adequate"; //余额不足
+			await conn.query("update user set balance = balance - ? where id = ?", [price, seller_id]);
+			await conn.query("update user set balance = balance + ? where id = ?", [price, buyer_id]);
+			await conn.query("update order_form set current_status = 5, refund_status = 2 where order_id = ?", [order_id]);  //更新订单状态
+			let deal_id = utils.createDealRecord();  //生成流水号
+			let param = [deal_id,order_id,seller_id,buyer_id,price];
+			await conn.query("insert into deal_record values (?,?,?,?,?,null,CURRENT_TIMESTAMP,0)", param);
+			callback(undefined, balance - price);
+			await conn.commit();
 		} else if (req.body.check == 0) {
 			sql = "update order_form set current_status = 3, refund_status = 3 where order_id = ? and seller_id = ?";
-		} else {
-			callback("invalid check status!", undefined);
-			return;
-		}
-		await conn.query(sql, [order_id, seller_id]);
-		callback(undefined, "confirm_ok");
+			await conn.query(sql, [order_id, seller_id]);
+			callback(undefined);
+		} else throw "error check code";
 	} catch (err) {
 		console.log(err);
-		callback(err, undefined);
+		await conn.rollback();  //数据库回滚
+		callback(err);
 	} finally {
 		if (conn) conn.release();
 	}
@@ -246,6 +280,43 @@ exported.confirm_shipment = async(req, res, callback) => {
 	} catch (err) {
 		console.log(err);
 		callback(err, undefined);
+	} finally {
+		if (conn) conn.release();
+	}
+}
+
+//买家确认收货
+exported.confirm_received = async(req, res, callback) => {
+	let cs = req.session.details[req.body.pos].current_status;
+	if (cs != 2) {
+		callback("invalid position!", undefined);
+		return;
+	}
+	const conn = await pool.getConnection();
+	//Step0: 从第三方转账到卖家
+	//Step1: 修改订单状态
+	//Step2: 生成交易流水
+	await conn.beginTransaction();  //事务
+	try {
+		let ret = await conn.query("select balance from user where id = ?" , [middle_id]);
+		let balance = ret[0][0].balance; //用户余额
+		let sql = "select * from order_form where order_id = ? and buyer_id = ?"; //二次确认订单合法性
+		let order_id = req.session.details[req.body.pos].order_id;
+		ret = await conn.query(sql , [order_id, req.session.token.uid]);
+		if (ret[0].length != 1) throw "invalid order"; //二次确认订单合法性
+		let {seller_id, buyer_id, price, current_status} = ret[0][0];
+		await conn.query("update user set balance = balance - ? where id = ?", [price, middle_id]);
+		await conn.query("update user set balance = balance + ? where id = ?", [price, seller_id]);
+		await conn.query("update order_form set current_status = 3 where order_id = ?", [order_id]);  //更新订单状态
+		let deal_id = utils.createDealRecord();  //生成流水号
+		let param = [deal_id,order_id,middle_id,seller_id,price];
+		await conn.query("insert into deal_record values (?,?,?,?,?,null,CURRENT_TIMESTAMP,0)", param);
+		callback(undefined, balance - price);
+		await conn.commit();
+	} catch (err) {
+		console.log(err);
+		await conn.rollback();  //数据库回滚
+		callback(err);
 	} finally {
 		if (conn) conn.release();
 	}
