@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 				//res.send("<script>alert('加载失败！');window.location.href='/user/login'</script>").end();
 			} else {
 				req.session.details = result;
-				res.render('transaction', {
+				res.render('./payment/transaction', {
 					username: req.session.token.username,
 					details: result,
 					length: result.length == null ? 0 : result.length,
@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
 				//res.send("<script>alert('加载失败！');window.location.href='/user/login'</script>").end();
 			} else {
 				req.session.details = result;
-				res.render('transactionseller', {
+				res.render('./payment/transactionseller', {
 					username: req.session.token.username,
 					details: result,
 					length: result.length == null ? 0 : result.length,
@@ -212,7 +212,7 @@ router.get('/orderInfo', (req, res) => {
 			if (err) {
 				res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
 			} else {
-				res.render('transactioninfo', {
+				res.render('./payment/transactioninfo', {
 					username: req.session.token.username,
 					details: ret[0] == null ? null : ret[0],
 					session: req.query.session
@@ -224,7 +224,7 @@ router.get('/orderInfo', (req, res) => {
 			if (err) {
 				res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
 			} else {
-				res.render('transactionsellerinfo', {
+				res.render('./payment/transactionsellerinfo', {
 					username: req.session.token.username,
 					details: ret[0] == null ? null : ret[0],
 					session: req.query.session
