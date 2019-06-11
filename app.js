@@ -8,6 +8,7 @@ let encrypt = require('./models/encrypt.js');
 //============================================================
 let exampleRouter = require('./routes/example'); //样例路由
 let paymentRouter = require('./routes/payment'); //支付处理路由
+let bookRouter    = require('./routes/book');    //在线预订路由
 //============================================================
 
 let app = express();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //============================================================
 app.use('/example', exampleRouter);
 app.use('/payment', paymentRouter);
+app.use('/book',    bookRouter);
 //============================================================
 
 app.use(function(req, res, next) {
