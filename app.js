@@ -6,8 +6,10 @@ let logger = require('morgan');
 let session = require('express-session'); 
 let encrypt = require('./models/encrypt.js');
 //============================================================
-let exampleRouter = require('./routes/example'); //样例路由
 let paymentRouter = require('./routes/payment'); //支付处理路由
+let accountRouter = require('./routes/account'); //样例理由
+let adminRouter = require('./routes/admin'); // backend router
+let indexRouter = require('./routes/index'); // backend router
 //============================================================
 
 let app = express();
@@ -27,8 +29,10 @@ app.use(session({secret: 'recommand 128 bytes random string', // 建议使用 12
 app.use(express.static(path.join(__dirname, 'public')));
 
 //============================================================
-app.use('/example', exampleRouter);
-app.use('/payment', paymentRouter);
+app.use('/payment', paymentRouter);  //支付处理路由
+app.use('/account', accountRouter);   //账户管理路由
+app.use('/account/admin', adminRouter);   //管理路由
+app.use('/', indexRouter);  //支付处理路由
 //============================================================
 
 app.use(function(req, res, next) {
