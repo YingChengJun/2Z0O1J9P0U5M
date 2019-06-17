@@ -199,7 +199,7 @@
         document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 退出";
       else
         document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 登录";
-    })
+    });
     $("#login-btn").click(function () {
       if (sessionStorage.getItem('loggedIn'))
         $.post("/exit", function (data) {
