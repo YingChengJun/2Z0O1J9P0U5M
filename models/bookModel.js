@@ -142,7 +142,7 @@ exported.hotel_cancel_orders = async(req, res, callback) => {
 exported.hotel_Info_modify = async (req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		let sql = "select hotelName,hotelLocation,hotelScore,hotelStar,hotelPrice from hotel_info where hotelName=? and hotelPrice=?;";
+		let sql = "select hotelName,hotelLocation,hotelScore,hotelStar,hotelPrice,hotelInstr,type from hotel_info where hotelName=? and hotelPrice=?;";
 		let order_Name = req.session.details[req.query.detail].hotelName;
 		let order_price=req.session.details[req.query.detail].hotelPrice;
 		let ret = await conn.query(sql, [order_Name, order_price]); 
@@ -158,14 +158,16 @@ exported.hotel_Info_modify = async (req, res, callback) => {
 exported.hotel_Info_modifying = async (req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		let sql = "update hotel_info set hotelName=?,hotelLocation=?,hotelScore=?,hotelStar=?,hotelPrice=? where hotelName=? and hotelPrice=?;";
+		let sql = "update hotel_info set hotelName=?,hotelLocation=?,hotelScore=?,hotelStar=?,hotelPrice=?,type=?,hotelInstr=? where hotelName=? and hotelPrice=?;";
 		let order_Name = req.query.hotelName;
 		let order_location=req.query.hotelLocation;
 		let order_score=req.query.hotelScore;
 		let order_star=req.query.hotelStar;
 		let order_price=req.query.hotelPrice;
+		let order_type=req.query.type;
+		let order_instr=req.query.hotelInstr;
 		console.log(req.query.Name);
-		let ret = await conn.query(sql, [order_Name, order_location,order_score,order_star,order_price,req.query.Name,req.query.Price]); 
+		let ret = await conn.query(sql, [order_Name, order_location,order_score,order_star,order_price,order_type,order_instr,req.query.Name,req.query.Price,]); 
 		callback(undefined, ret[0]);
 	} catch (err) {
 		console.log(err);
@@ -209,15 +211,17 @@ exported.hotel_modify_info_manager = async (req, res, callback) => {
 exported.hotel_Info_new = async (req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		let sql = "insert into hotel_info (hotelName,hotelLocation,hotelScore,hotelStar,hotelPrice,roomAllowance) values (?,?,?,?,?,?);";
+		let sql = "insert into hotel_info (hotelName,hotelLocation,hotelScore,hotelStar,hotelPrice,roomAllowance,type,hotelInstr) values (?,?,?,?,?,?,?,?);";
 		let order_Name = req.query.hotelName;
 		let order_location=req.query.hotelLocation;
 		let order_score=req.query.hotelScore;
 		let order_star=req.query.hotelStar;
 		let order_price=req.query.hotelPrice;
 		let order_room=req.query.room;
-		console.log(req.query.Name);
-		let ret = await conn.query(sql, [order_Name, order_location,order_score,order_star,order_price,order_room]); 
+		let order_type=req.query.type;
+		let order_instr=req.query.instr;
+		console.log(req.query.hotelName);
+		let ret = await conn.query(sql, [order_Name, order_location,order_score,order_star,order_price,order_room,order_type,order_instr]); 
 		callback(undefined, ret[0]);
 	} catch (err) {
 		console.log(err);
@@ -406,7 +410,7 @@ exported.flight_cancel_orders = async(req, res, callback) => {
 	try {
 		let order_Name = req.session.details[req.body.delete_mes].flightName;
 		let order_price=req.session.details[req.body.delete_mes].flightPrice;
-		console.log(order_Name);
+		console.log(req.body.delete_mes);
 		await conn.query("delete from flight_info where flightName = ? and flightPrice= ?", [order_Name,order_price]);
 
 		callback(undefined, "cancel_ok");

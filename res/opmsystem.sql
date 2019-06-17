@@ -195,7 +195,7 @@ CREATE TABLE `sys_statistics` (
 
 -- ----------------------------
 -- Table structure for `user`
--- ---------------------------
+-- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -203,14 +203,15 @@ CREATE TABLE `user` (
   `password` varchar(32) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '密码',
   `realName` varchar(32) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '姓名',
   `licenseNumber` varchar(18) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '证件号',
-  `dateOfBirth` char(12) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '出生日期',
+  `dateOfBirth` char(8) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '出生日期',
   `phoneNumber` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '手机号',
   `emailAddr` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '邮箱',
   `typeOfUser` int(11) DEFAULT NULL COMMENT '用户类型',
   `balance` decimal(19,2) DEFAULT NULL COMMENT '余额',
   `payPassword` varchar(32) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '支付密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Records of user
 -- ----------------------------

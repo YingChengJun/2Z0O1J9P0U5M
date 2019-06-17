@@ -60,7 +60,7 @@
             <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
           </ul>
           <ul class="nav navbar-nav float-xs-right">
-            <li class="nav-item"><a href="javascript:void(0);" onclick="javascript:history.back(-1);" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>返回</a></li>
+            <li class="nav-item"><a href="./hotel_modifyingInfo" onclick="javascript:history.back(-1);" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>返回</a></li>
           </ul>
         </div>
       </div>
@@ -73,19 +73,7 @@
     <!-- main menu header-->
     <!-- / main menu header-->
     <!-- main menu content-->
-    <div class="main-menu-content menu-accordion">
-      <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-        <li class="nav-item">
-          <a href=""><i class="icon-home3"></i><span data-i18n="" class="menu-title">我的账户</span></a>
-        </li>
-        <li class="nav-item">
-          <a href=""><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">在线预定</span></a>
-        </li>
-        <li class="active">
-          <a href=""><i class="icon-folder3"></i><span data-i18n="" class="menu-title">我的订单</span></a>
-        </li>
-      </ul>
-    </div>
+    
     <!-- /main menu content-->
     <!-- main menu footer-->
     <!-- main menu footer-->
@@ -132,6 +120,14 @@
                     <tr>
                       <td>房间余量</td>
                       <td><input type="text" size="30" style="border: 1px solid gray;border-radius: 4px;padding:8px" required name="room" id="room"></td>
+                    </tr>
+                    <tr>
+                      <td>房型：1-单人间 2-双人间 3-豪华间</td>
+                      <td><input type="text" size="30" style="border: 1px solid gray;border-radius: 4px;padding:8px" required name="type" ></td>
+                    </tr>
+                    <tr>
+                      <td>酒店信息</td>
+                      <td><input type="text" size="30" style="border: 1px solid gray;border-radius: 4px;padding:8px" required name="instr"></td>
                     </tr>
                   </tbody>
                 </table>
