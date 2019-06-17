@@ -5,6 +5,7 @@ let utils = require('../models/utils.js'); //自定义工具库
 let encrypt = require('../models/encrypt.js');  //base64加密核心库
 let svgCaptcha = require('svg-captcha');  //动态验证码核心课
 let app = express();
+const ADMIN = 3;
 const SELLER = 2;
 const BUYER = 1;
 // const token = {
@@ -55,7 +56,7 @@ router.get('/', (req, res) => {
 				});
 			}
 		});	
-	}
+	} else res.send("<script>alert('好像你的身份不能访问呢!');</script>").end();
 });
 
 router.post('/confirmReceived', (req, res) => {
