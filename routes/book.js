@@ -343,9 +343,11 @@ router.get('/flight_modifyInfo', (req, res) => {
 			res.send("<script>alert('年轻人你的思想很危险!');</script>").end();
 		} else {
 			res.render('./book/flight/flightinfomodify', {
+
 				details: ret[0] == null ? null : ret[0],
 				detail_name: ret[0].flightName,
 				detail_price:ret[0].flightPrice
+
 			});
 		}
 	});
@@ -465,7 +467,8 @@ router.get('/hotel_comment', (req, res) => {
 					//username: req.query.user,
 					details: result,
 					length: result.length == null ? 0 : result.length,
-					name:req.query.hotelName
+					name:req.query.hotelName,
+					price:req.query.hotelPrice
 				});
 			}
     	})
@@ -519,7 +522,10 @@ router.get('/main_flight1', (req,res) => {
 				req.session.details = result;
 				res.render('./book/flight/main_flight1', {
 					//username: req.query.user,
-					details: result
+					details: result,
+					flight:req.query.flight,
+					flight1:req.query.flight1,
+					flight2:req.query.flight2
 				});
 			}
     	})
@@ -538,7 +544,10 @@ router.get('/flight_comment', (req, res) => {
 					//username: req.query.user,
 					details: result,
 					length: result.length == null ? 0 : result.length,
-					name:req.query.flightName
+					name:req.query.flightName,
+					flight:req.query.flight,
+					flight1:req.query.flight1,
+					flight2:req.query.flight2
 				});
 			}
     	})
@@ -574,7 +583,10 @@ router.get('/flight_message', (req, res) => {
 router.get('/flight_book', (req,res) => {
 	res.render('./book/flight/flight_book',{
 		name:req.query.flightName,
-		price:req.query.flightPrice
+		price:req.query.flightPrice,
+		flight:req.query.flight,
+		flight1:req.query.flight1,
+		flight2:req.query.flight2
 	});
 
 });

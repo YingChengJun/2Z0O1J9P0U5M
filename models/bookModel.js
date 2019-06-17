@@ -441,7 +441,7 @@ exported.flight_Info_modify = async (req, res, callback) => {
 exported.flight_Info_modifying = async (req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		let sql = "update flight_info set flightName=?,flightCompany=?,departureTime=?,departurePlace=?,landingTime=?,landingPlace=?,flightPrice=? where flightName=? and flightPrice=?;";
+		let sql = "update flight_info set flightName=?,flightCompany=?,departureTime=?,departurePlace=?,landingTime=?,landingPlace=?,flightPrice=?,ticketAllowance=? where flightName=? and flightPrice=?;";
 		let order_Name = req.query.flightName;
 		let order_Company=req.query.flightCompany;
 		let order_departurePlace=req.query.departurePlace;
@@ -449,8 +449,9 @@ exported.flight_Info_modifying = async (req, res, callback) => {
 		let order_landingPlace=req.query.landingPlace;
 		let order_landingTime=req.query.landingTime;
 		let order_price=req.query.flightPrice;
+		let order_ticket=req.query.ticketAllowance;
 		console.log(req.query.Name);
-		let ret = await conn.query(sql, [order_Name, order_Company,order_departureTime,order_departurePlace,order_landingTime,order_landingPlace,order_price,req.
+		let ret = await conn.query(sql, [order_Name, order_Company,order_departureTime,order_departurePlace,order_landingTime,order_landingPlace,order_price,order_ticket,req.
 		query.Name,req.query.Price]); 
 		callback(undefined, ret[0]);
 	} catch (err) {
@@ -494,7 +495,7 @@ exported.flight_modify_info_manager = async (req, res, callback) => {
 exported.flight_Info_new = async (req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
-		let sql = "insert into flight_info (flightName,flightCompany,departureTime,departurePlace,landingTime,landingPlace,flightPrice) values (?,?,?,?,?,?,?);";
+		let sql = "insert into flight_info (flightName,flightCompany,departureTime,departurePlace,landingTime,landingPlace,flightPrice,ticketAllowance) values (?,?,?,?,?,?,?,?);";
 		let order_Name = req.query.flightName;
 		let order_Company=req.query.flightCompany;
 		let order_departurePlace=req.query.departurePlace;
@@ -502,8 +503,9 @@ exported.flight_Info_new = async (req, res, callback) => {
 		let order_landingPlace=req.query.landingPlace;
 		let order_landingTime=req.query.landingTime;
 		let order_price=req.query.flightPrice;
+		let order_ticket=req.query.ticketAllowance;
 		console.log(req.query.Name);
-		let ret = await conn.query(sql, [order_Name, order_Company,order_departureTime,order_departurePlace,order_landingTime,order_landingPlace, order_price]); 
+		let ret = await conn.query(sql, [order_Name, order_Company,order_departureTime,order_departurePlace,order_landingTime,order_landingPlace, order_price,order_ticket]); 
 		callback(undefined, ret[0]);
 	} catch (err) {
 		console.log(err);

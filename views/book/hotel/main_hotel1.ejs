@@ -88,7 +88,7 @@
                   <p>Biscuit macaroon tootsie roll croissant. Dessert candy canes halvah cookie liquorice. Candy canes muffin gummies jujubes brownie. Pie cake pie pastry sugar plum jelly apple pie cotton candy.</p></i>
                 </div></a></li> -->
             <!-- <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="branding logo" src="../app-assets/images/logo/robust-logo-light.png" data-expand="../app-assets/images/logo/robust-logo-light.png" data-collapse="../app-assets/images/logo/robust-logo-small.png" class="brand-logo"></a></li> -->
-            <li class="nav-item"><a href="index.html" class="navbar-brand nav-link">在线支付系统</a></li>
+            <li class="nav-item"><a href="/account/balance" class="navbar-brand nav-link">在线支付系统</a></li>
             <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x fa-rotate-90"></i></a></li>
           </ul>
         </div>
@@ -99,8 +99,8 @@
               <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
             </ul>
             <ul class="nav navbar-nav float-xs-right">
-              <li class="nav-item"><a href="regis.html" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i> 登陆</a></li>
-              <li class="nav-item"><a href="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i> 我的</a></li>
+              
+              <li class="nav-item"><a href="/book/hotel_hotelsearch" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>主页</a></li>
             </ul>
           </div>
         </div>
@@ -117,10 +117,8 @@
       <!-- main menu content-->
       <div class="main-menu-content menu-accordion">
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-          <li class="active"><a href="./hotel_orderInfo?pos=<%= name %>"><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">酒店预订</span></a>
-          </li>
-          <li class=" nav-item"><a href="/hotel/booking"><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">航班预订</span></a>
-         
+          <li class="active"><a href="./hotel_orderInfo?pos=<%= name %>"><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">酒店信息</span></a>
+          </li>         
         </ul>
       </div>
       <!-- /main menu content-->
@@ -150,16 +148,17 @@
                     <div class="card-body collapse in" aria-expanded="true">
                         <div class="card-block">
                               <div class="table-responsive">      
-                                              
-                              <img src="<%= details[1].hotelImg1 %>" class= "img-rounded" width="400" height="280">&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp
-                              <img src="<%= details[1].hotelImg2 %>" class="img-rounded" width="450" height="280" >
+                               <% if (details[0].hotelImg1&&details[0].hotelImg2) { %>               
+                              <img src="<%= details[0].hotelImg1 %>" class= "img-rounded" width="400" height="280">&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp
+                              <img src="<%= details[0].hotelImg2 %>" class="img-rounded" width="450" height="280" >
+                              <% } %>
                          <br>
                          <br>
                          <br>
                          <h4>
-                           <p><%= details[1].hotelInstr %></p>
+                           <p><%= details[0].hotelInstr %></p>
                          </h4>
-                         <h6>地址：<%= details[1].hotelLocation %></h6>
+                         <h6>地址：<%= details[0].hotelLocation %></h6>
                                   </div>
                         </div>
                     </div>
@@ -267,7 +266,7 @@
                 </div>
                 <div class="form-actions center">
                   <a href="./hotel_booking?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="booking">酒店预订</button></a>
-                  <a href="./hotel_comment?hotelName=<%= details[0].hotelName %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="comment">酒店评价</button></a>
+                  <a href="./hotel_comment?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="comment">酒店评价</button></a>
                                     
                                     
                       </div>
