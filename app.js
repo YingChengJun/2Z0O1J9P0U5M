@@ -8,6 +8,7 @@ let encrypt = require('./models/encrypt.js');
 //============================================================
 let paymentRouter = require('./routes/payment'); //支付处理路由
 let accountRouter = require('./routes/account'); //样例理由
+let bookRouter    = require('./routes/book');    //在线预订路由
 let adminRouter = require('./routes/admin'); // backend router
 let indexRouter = require('./routes/index'); // backend router
 //============================================================
@@ -33,6 +34,7 @@ app.use('/payment', paymentRouter);  //支付处理路由
 app.use('/account', accountRouter);   //账户管理路由
 app.use('/account/admin', adminRouter);   //管理路由
 app.use('/', indexRouter);  //支付处理路由
+app.use('/book', bookRouter);
 //============================================================
 
 app.use(function(req, res, next) {

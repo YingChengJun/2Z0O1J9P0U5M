@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>酒店信息详情</title>
+    <meta name=apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
+    <!-- font icons-->
+    <link rel="stylesheet" type="text/css" href="../app-assets/fonts/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/extensions/pace.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN ROBUST CSS-->
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
+    <!-- END ROBUST CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+    <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/documentation.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END Custom CSS-->
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        .wrap{
+            margin: 0px auto;
+            width: 800px;
+            height: 400px;
+            border:0px;
+            position: relative;
+        }
+        label{
+            width: 200px;
+            height: 40px;
+            float: left;
+            text-align: center;
+            line-height:30px;
+            border-right: 3px groove #D3D3D3;
+            border-bottom: 3px groove #D3D3D3;
+        }
+        label:nth-of-type(4){
+            border-right: none;
+        }
+        label span{
+            cursor: pointer;
+            font-family:Fantasy;
+            font-size: 20px;
+        }
+        label div{
+            width: 800px;
+            height: 300px;
+            position: absolute;
+            left: 0;
+            top: 43px;
+            background: #FFFFFF;
+            display: none;
+        }
+        label input{
+            width: 0;
+        }
+        input:checked+div{
+            display: block;
+        }
+    </style>
+  </head>
+  <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
+
+    <!-- - var navbarCustom = "navbar-fixed-top navbar-semi-dark navbar-shadow"-->
+    <!-- navbar-fixed-top-->
+    <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
+      <div class="navbar-wrapper">
+        <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <!-- <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1">
+                  <div class="bs-callout-info callout-border-left mt-1 p-1">
+                  <strong>Great Job!</strong>
+                  <p>Biscuit macaroon tootsie roll croissant. Dessert candy canes halvah cookie liquorice. Candy canes muffin gummies jujubes brownie. Pie cake pie pastry sugar plum jelly apple pie cotton candy.</p></i>
+                </div></a></li> -->
+            <!-- <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="branding logo" src="../app-assets/images/logo/robust-logo-light.png" data-expand="../app-assets/images/logo/robust-logo-light.png" data-collapse="../app-assets/images/logo/robust-logo-small.png" class="brand-logo"></a></li> -->
+            <li class="nav-item"><a href="index.html" class="navbar-brand nav-link">在线支付系统</a></li>
+            <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x fa-rotate-90"></i></a></li>
+          </ul>
+        </div>
+        <div class="navbar-container content">
+          <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
+            <ul class="nav navbar-nav">
+              <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
+              <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav float-xs-right">
+              <li class="nav-item"><a href="regis.html" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i> 登陆</a></li>
+              <li class="nav-item"><a href="https://pixinvent.com/bootstrap-admin-template/robust/" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i> 我的</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- main menu-->
+    <div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+      <!-- main menu header-->
+      <!-- / main menu header-->
+      <!-- main menu content-->
+      <div class="main-menu-content menu-accordion">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+          <li class="active"><a href="/hotel/main_hotel1"><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">酒店预订</span></a>
+          </li>
+          <li class=" nav-item"><a href="/hotel/booking"><i class="icon-android-menu"></i><span data-i18n="" class="menu-title">航班预订</span></a>
+         
+        </ul>
+      </div>
+      <!-- /main menu content-->
+      <!-- main menu footer-->
+      <!-- main menu footer-->
+    </div>
+    <!-- / main menu-->
+    
+ 
+    <div class="app-content content container-fluid">
+      <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body"><!-- Overview -->
+            <div class="card">
+                    <div class="card-header">
+                        <h4 id="basic-forms" class="card-title"><%= details[0].hotelName %></h4>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li>评分&nbsp &nbsp<%= details[0].hotelScore %></li>
+                                
+                                                             <!-- <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                <li><a data-action="expand"><i class="icon-expand2"></i></a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body collapse in" aria-expanded="true">
+                        <div class="card-block">
+                              <div class="table-responsive">      
+                                              
+                              <img src="<%= details[1].hotelImg1 %>" class= "img-rounded" width="400" height="280">&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp
+                              <img src="<%= details[1].hotelImg2 %>" class="img-rounded" width="450" height="280" >
+                         <br>
+                         <br>
+                         <br>
+                         <h4>
+                           <p><%= details[1].hotelInstr %></p>
+                         </h4>
+                         <h6>地址：<%= details[1].hotelLocation %></h6>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h4 id="basic-forms" class="card-title">房型</h4>
+                  </div>
+                  <div class="card-body" aria-expanded="true">
+                    <div class="card-block">
+                      <div class="wrap">
+                      <label>
+        <span>双人间</span>
+        <input type="radio" name="tab" checked>
+        <div>
+          <br>
+          <table>
+            <tr>
+              <td><img src="../images/hotel/1_double.jpg" width="300" height="200"></td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>
+                <ul style="font-size: 17px">
+                  <li>双床</li>
+                  <li>含早餐</li>
+                  <li>24小时热水</li>
+                  <li>须凭本人身份证件入住</li>
+                </ul>
+              </td>
+            </tr>
+            <tr><td>&nbsp</td></tr>
+            <tr><td>&nbsp</td></tr>
+            <tr>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td style="font-size: 20px"><i class="icon-momey1"></i>价格：(标准价)<%= details[1].hotelPrice %>元</td>
+            </tr>
+          </table>
+          
+        </div>
+    </label>
+    <label>
+        <span>单人间</span>
+        <input type="radio" name="tab">
+        <div>
+          <br>
+          <table>
+            <tr>
+              <td><img src="../images/hotel/1_single.jpg" width="300" height="200"></td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>
+                <ul style="font-size: 17px">
+                  <li>单床</li>
+                  <li>含早餐</li>
+                  <li>24小时热水</li>
+                  <li>须凭本人身份证件入住</li>
+                </ul>
+              </td>
+            </tr>
+            <tr><td>&nbsp</td></tr>
+            <tr><td>&nbsp</td></tr>
+            <tr>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td style="font-size: 20px"><i class="icon-momey1"></i>价格：（标准价）<%= details[0].hotelPrice %>元</td>
+            </tr>
+          </table>
+          
+        </div>
+    </label>
+    <label>
+        <span>豪华间</span>
+        <input type="radio" name="tab">
+        <div>
+          <br>
+          <table>
+            <tr>
+              <td><img src="../images/hotel/1_lux.jpg" width="300" height="200"></td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>
+                <ul style="font-size: 17px">
+                  <li>双床</li>
+                  <li>含早餐</li>
+                  <li>24小时热水</li>
+                  <li>须凭本人身份证件入住</li>
+                </ul>
+              </td>
+            </tr>
+            <tr><td>&nbsp</td></tr>
+            <tr><td>&nbsp</td></tr>
+            <tr>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td style="font-size: 20px"><i class="icon-momey1"></i>价格：（标准价）<%= details[2].hotelPrice %>元</td>
+            </tr>
+          </table>
+          
+        </div>
+    </label>         
+                      </div>
+                   
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+                <div class="form-actions center">
+                  <a href="./hotel_booking?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="booking">酒店预订</button></a>
+                  <a href="./hotel_comment?hotelName=<%= details[0].hotelName %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="comment">酒店评价</button></a>
+                                    
+                                    
+                      </div>
+
+            <div class="card-body">
+					<div class="card-block">
+						<h4 class="card-title">酒店设施&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4>
+					</div>
+					<div class="card-block">
+						<ul>
+        <li>免费WIFI</li>
+        <li>收费停车场</li>
+        <li>行李寄存&24小时前台</li>
+        <li>中&西餐厅</li>    
+        <li>洗衣服务&婚宴服务</li>
+        <li>公共区监控系统</li>  
+            </ul>
+					</div>
+				</div>
+        <div class="card-block">
+            <h4 class="card-title">酒店政策</h4>
+          </div>
+          <div class="card-block">
+            <ul>
+        <li>入住时间：14:00以后      离店时间：12:00以前</li>
+        <li>酒店允许携带儿童入住</li>
+        <li>不接受18岁以下客人在无监护人陪同的情况下入住</li>
+           <li>1.1米以下早餐免费，1.1—1.4米早餐半价</li>
+        <li>加床及儿童政策取决于您所选的房型，若超过房型限定人数，或携带儿童年龄不在政策描述范围内，可能需收取额外费用，提出的任何要求均需获得酒店的确认。</li>    
+        <li>早餐：自助餐  108元/人</li>
+        <li>不可携带宠物</li>
+        <li>可用支付方式：银联  支付宝  微信</li>
+            </ul>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+<!-- 
+    <footer class="footer footer-static footer-light navbar-border">
+      <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="icon-heart5 pink"></i></span></p>
+    </footer> -->
+
+    <!-- BEGIN VENDOR JS-->
+    <script src="../app-assets/js/core/libraries/jquery.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/tether.min.js" type="text/javascript"></script>
+    <script src="../app-assets/js/core/libraries/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/unison.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/blockUI.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/jquery.matchHeight-min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/screenfull.min.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/extensions/pace.min.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN ROBUST JS-->
+    <script src="../app-assets/js/core/app-menu.js" type="text/javascript"></script>
+    <script src="../app-assets/js/core/app.js" type="text/javascript"></script>
+    <!-- END ROBUST JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../app-assets/js/scripts/documentation.js" type="text/javascript"></script>
+    <script src="../app-assets/vendors/js/ui/affix.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS-->
+  </body>
+</html>
