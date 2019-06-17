@@ -96,11 +96,11 @@
           <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
             <ul class="nav navbar-nav">
               <li class="nav-item hidden-sm-down"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5"></i></a></li>
-              <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-link-expand"><i class="ficon icon-expand2"></i></a></li>
+              
             </ul>
             <ul class="nav navbar-nav float-xs-right">
               
-              <li class="nav-item"><a href="/book/hotel_hotelsearch" target="_blank" class="btn btn-success btn-doc-header"><i class="icon-bag3"></i>主页</a></li>
+              
             </ul>
           </div>
         </div>
@@ -170,7 +170,8 @@
                   <div class="card-body" aria-expanded="true">
                     <div class="card-block">
                       <div class="wrap">
-                      <label>
+         <% if (details.length>=2) { %>                 
+       <label>
         <span>双人间</span>
         <input type="radio" name="tab" checked>
         <div>
@@ -199,6 +200,8 @@
           
         </div>
     </label>
+    <% } %>
+    <% if (details.length>=1) { %> 
     <label>
         <span>单人间</span>
         <input type="radio" name="tab">
@@ -228,6 +231,8 @@
           
         </div>
     </label>
+    <% } %>
+    <% if (details.length>=3) { %>
     <label>
         <span>豪华间</span>
         <input type="radio" name="tab">
@@ -256,7 +261,8 @@
           </table>
           
         </div>
-    </label>         
+    </label> 
+    <% } %>        
                       </div>
                    
                     </div>
@@ -265,7 +271,7 @@
                   
                 </div>
                 <div class="form-actions center">
-                  <a href="./hotel_booking?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="booking">酒店预订</button></a>
+                  <a href="./hotel_booking?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>&pos=<%=name%>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="booking">酒店预订</button></a>
                   <a href="./hotel_comment?hotelName=<%= details[0].hotelName %>&hotelPrice=<%= details[0].hotelPrice %>"><button class="btn btn-success btn-doc-header btn-lg btn-block" type="button" id="comment">酒店评价</button></a>
                                     
                                     
