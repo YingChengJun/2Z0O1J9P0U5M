@@ -36,6 +36,7 @@
   <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
   <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
   <link rel="stylesheet" type="text/css" href="../app-assets/css/core/colors/palette-gradient.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/documentation.css">
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
@@ -99,12 +100,11 @@
           <ul class="menu-content">
             <li><a href="account" data-i18n="nav.dash.main" class="menu-item">修改信息</a>
             </li>
-            <li><a href="change_passwd" data-i18n="nav.dash.main" class="menu-item">密码找回</a>
+            <li><a href="change_passwd" data-i18n="nav.dash.main" class="menu-item">密码修改</a>
             </li>
             <li class="active"><a href="balance" data-i18n="nav.dash.main" class="menu-item">余额与充值</a>
             </li>
-            <li><a href="admin" data-i18n="nav.dash.main" class="menu-item">管理后台</a>
-            </li>
+           <% if(typeOfUser==3) { %> <li><a href="admin" data-i18n="nav.dash.main" class="menu-item">管理后台</a></li> <%} %>
           </ul>
         </li>
         </li>
@@ -184,7 +184,7 @@
       })
       $("#login-btn").click(function () {
         if (sessionStorage.getItem('loggedIn'))
-          $.post("/exit", function (data) {
+          $.post("/account/exit", function (data) {
             if (data.status == 1) {
               alert("登出成功");
               sessionStorage.clear();

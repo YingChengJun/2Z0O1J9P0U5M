@@ -427,7 +427,7 @@ module.exports = {
     try {
       const conn = await pool.getConnection();
       let id = req.session.token.uid;
-      let balance = "select balance,username from user where id = '" + id + "'";
+      let balance = "select balance,username,typeOfUser from user where id = '" + id + "'";
       ret = await conn.query(balance);
       callback(undefined, ret[0]);
       conn.release();

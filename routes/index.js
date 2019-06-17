@@ -4,7 +4,9 @@ let app = express();
 
 //main page
 router.get('/', (req, res) => {
-	res.redirect('../account/login');
+	if (req.session.token) {
+		res.redirect('../account');
+	} else res.redirect('../account/login');
 });
 
 router.get('/logout', (req, res)=> {

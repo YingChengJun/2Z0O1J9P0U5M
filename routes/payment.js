@@ -7,19 +7,19 @@ let svgCaptcha = require('svg-captcha');  //动态验证码核心课
 let app = express();
 const SELLER = 2;
 const BUYER = 1;
-const token = {
-	username: '嘤菜鸡',
-	uid: '1',
-	typeOfUser: 1
-}
+// const token = {
+// 	username: '嘤菜鸡',
+// 	uid: '1',
+// 	typeOfUser: 1
+// }
 
 router.get('/', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	//code for check session will be put here
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	//---------------------------
@@ -60,10 +60,10 @@ router.get('/', (req, res) => {
 
 router.post('/confirmReceived', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	pmodel.confirm_received(req, res, (err, ret) => {
@@ -77,10 +77,10 @@ router.post('/confirmReceived', (req, res) => {
 
 router.post('/cancelOrder', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	pmodel.cancel_orders(req, res, (err, ret) => {
@@ -94,10 +94,10 @@ router.post('/cancelOrder', (req, res) => {
 
 router.post('/applyRefund', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	req.body.pos = valid_check(req.body.pos);
@@ -116,10 +116,10 @@ router.post('/applyRefund', (req, res) => {
 
 router.post('/cancelRefund', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	pmodel.cancel_refund(req, res, (err, ret) => {
@@ -133,10 +133,10 @@ router.post('/cancelRefund', (req, res) => {
 
 router.post('/confirmRefund', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 
@@ -156,10 +156,10 @@ router.post('/confirmRefund', (req, res) => {
 
 router.post('/confirmShipment', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	pmodel.confirm_shipment(req, res, (err, ret) => {
@@ -173,10 +173,10 @@ router.post('/confirmShipment', (req, res) => {
 
 router.post('/complain', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	req.body.pos = valid_check(req.body.pos);
@@ -196,10 +196,10 @@ router.post('/complain', (req, res) => {
 
 router.get('/orderInfo', (req, res) => {
 	//for developer to test
-	req.session.token = token;
+	//req.session.token = token;
 	//--------------------------
 	if (!req.session.token) {
-		console.log("登录态过期，请重新登录！");
+		res.send("<script>alert('登录态过期，请重新登录!');window.location.href='/';</script>").end();
 		return;
 	}
 	let deCode = valid_check(req.query.oid);  //对订单号进行base64加密

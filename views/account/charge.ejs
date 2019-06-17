@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <title>充值中心</title>
 
-<link rel="stylesheet" type="text/css" href="./bootstrap/css/amazeui.min.css" />
-<link rel="stylesheet" type="text/css" href="./bootstrap/css/main.css" />
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/amazeui.min.css" />
+<link rel="stylesheet" type="text/css" href="../bootstrap/css/main.css" />
 <!-- BEGIN VENDOR CSS-->
-<link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css">
 <!-- font icons-->
-<link rel="stylesheet" type="text/css" href="../app-assets/fonts/icomoon.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/extensions/pace.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/fonts/icomoon.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/extensions/pace.css">
 <!-- END VENDOR CSS-->
 <!-- BEGIN ROBUST CSS-->
-<link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/css/app.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/app.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css">
 <!-- END ROBUST CSS-->
 <!-- BEGIN Page Level CSS-->
-<link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
-<link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/documentation.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+<link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/documentation.css">
 <!-- END Page Level CSS-->
 <!-- BEGIN Custom CSS-->
-<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
 <!-- END Custom CSS-->
 </head>
 <body>
@@ -32,19 +32,19 @@
 	<!--主内容开始编辑-->
 	<div class="tr_recharge">
 		<div class="tr_rechtext">
-			<p class="te_retit"><img src="./images/coin.png" alt="" />充值中心</p>
+			<p class="te_retit"><img src="../images/coin.png" alt="" />充值中心</p>
 			<p>1.在线支付系统充值中心很高兴为您服务。</p>
 			<p>2.您可以选择校园卡进行充值，每次最低充值十元</p>
 		</div>
 		<form action="" class="am-form" id="doc-vld-msg">
 			<div class="tr_rechbox">
 				<div class="tr_rechhead">
-					<img src="./images/ys_head2.jpg" />
+					<img src="../images/ys_head2.jpg" />
 					<p>充值帐号：
 						<span id="username"><%= username %></span>
 					</p>
 					<div class="tr_rechheadcion">
-						<img src="./images/coin.png" alt="" />
+						<img src="../images/coin.png" alt="" />
 						<span>当前余额：<span id="balance" >￥<%= balance %></span></span>
 					</div>
 				</div>
@@ -78,12 +78,12 @@
 					<input type="number" min="10" max="10000" value="10.00元" class="othbox" data-validation-message="充值金额范围：10-10000元" />
 				</div>
 				<div class="tr_rechcho am-form-group">
-					<p style = "margin:8px">充值方式：</p>
+				<span>支付方式：</span>
 					<label class="am-radio">
-							<input type="radio" name="radio1" value="" data-am-ucheck required data-validation-message="请选择一种充值方式"><img src="./images/wechatpay.png">
+							<input type="radio" name="radio1" value="" data-am-ucheck required data-validation-message="请选择一种充值方式"><img src="../images/wechatpay.png">
 						</label>
 					<label class="am-radio" style="margin-right:25px;">
-							<input type="radio" name="radio1" value="" data-am-ucheck data-validation-message="请选择一种充值方式"><img src="./images/zfbpay.png" >
+							<input type="radio" name="radio1" value="" data-am-ucheck data-validation-message="请选择一种充值方式"><img src="../images/zfbpay.png" >
 						</label>
 				</div>
 				<div text-align:left>
@@ -128,9 +128,9 @@
 		</form>
 	</div>
 </div>
-<script type="text/javascript" src="./bootstrap/js/jquery.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/amazeui.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/ui-choose.js"></script>
+<script type="text/javascript" src="../bootstrap/js/jquery.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../bootstrap/js/ui-choose.js"></script>
 <script type="text/javascript">
 	// 将所有.ui-choose实例化
 	$('.ui-choose').ui_choose();

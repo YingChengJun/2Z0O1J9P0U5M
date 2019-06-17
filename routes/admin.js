@@ -2,29 +2,21 @@ let express = require('express');
 let router = express.Router();
 let mysql = require('mysql');
 
-// // set database
+// set database
 // let con = mysql.createConnection({
 //     host: 'localhost',
 //     user: 'root',
-//     password: 'password',
-//     database: 'account',
+//     password: '',
+//     database: '',
 //     port: '3306'
-// });
-
-// con.connect(err=>{
-//     if(err){
-//         console.log('connect err');
-//     }
 // });
 
 router.get('/', function(req, res, next) {
     if(!req.session.token){
         res.redirect('../account');
-        console.log('not login');
     }
     if(req.session.token.typeOfUser != 3){
         res.redirect('../account');
-        console.log('not admin');
     }
 
     let data = "";
@@ -45,11 +37,9 @@ router.get('/', function(req, res, next) {
 router.get('/stat', (req, res)=>{
     if(!req.session.token){
         res.redirect('../account');
-        console.log('not login');
     }
     if(req.session.token.typeOfUser != 3){
         res.redirect('../account');
-        console.log('not admin');
     }
     con.query('SELECT COUNT(id) AS USERNUM FROM user',' ',(err, row)=>{
         if(err){
@@ -63,14 +53,11 @@ router.get('/stat', (req, res)=>{
 router.get('/userReset', (req, res, next)=>{
     if(!req.session.token){
         res.redirect('../account');
-        console.log('not login');
     }
     if(req.session.token.typeOfUser != 3){
         res.redirect('../account');
-        console.log('not admin');
     }
     let id = req.query.id;
-    console.log(id);
     let pwd = '12345678';
     con.query('UPDATE user SET password = ? WHERE id = ?',[pwd, id], (err, rows)=>{
         if(err){
