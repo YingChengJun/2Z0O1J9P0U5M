@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 router.get('/logout', (req, res)=> {
 	req.session.destroy();
-	res.redirect('../account/login');
+	res.send("<script>alert('注销成功!');window.location.href='../account/login';</script>");
 });
 
 module.exports = router;

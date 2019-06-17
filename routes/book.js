@@ -328,9 +328,9 @@ router.post('/flight_cancelOrder', (req, res) => {
 	
 	bmodel.flight_cancel_orders(req, res, (err, ret) => {
 		if (err) {
-			res.send("<script>alert('订单取消失败!'); self.location = document.referrer;</script>").end();
+			res.send("<script>alert('删除失败!'); self.location = document.referrer;</script>").end();
 		} else {
-			res.send("<script>alert('订单取消成功!'); self.location = document.referrer;</script>").end();
+			res.send("<script>alert('删除成功!'); self.location = document.referrer;</script>").end();
 		}
 	});
 });
@@ -414,7 +414,8 @@ router.get('/roombooking', (req,res)=> {
 					req.session.details = result;
 					res.render('./book/hotel/main_hotel1', {
 						//username: req.query.user,
-						details: result
+						details: result,
+						name:req.query.Name
 					});
 				}
 	    	})
@@ -443,8 +444,8 @@ router.get('/hotel_message', (req, res) => {
 					//username: req.query.user,
 					details: result,
 					length: result.length == null ? 0 : result.length,
-					name:req.query.hotelName
-
+					name:req.query.hotelName,
+					price:req.query.hotelPrice
 				});
 				//res.send("<script>alert('评论成功!'); self.location = document.referrer;</script>").end();
 			}
@@ -487,7 +488,7 @@ router.get('/main_hotel1', (req,res) => {
 				res.render('./book/hotel/main_hotel1', {
 					//username: req.query.user,
 					details: result,
-                    name: req.query.location
+                    name: req.query.pos
 				});
 			}
     	})
@@ -496,7 +497,8 @@ router.get('/main_hotel1', (req,res) => {
 router.get('/hotel_booking', (req,res) => {
 	res.render('./book/hotel/booking',{
 		name:req.query.hotelName,
-		price:req.query.hotelPrice
+		price:req.query.hotelPrice,
+		pos:req.query.pos
 
 	});
 });
@@ -571,7 +573,10 @@ router.get('/flight_message', (req, res) => {
 					//username: req.query.user,
 					details: result,
 					length: result.length == null ? 0 : result.length,
-					name:req.query.flightName
+					name:req.query.flightName,
+					flight:req.query.flight,
+					flight1:req.query.flight1,
+					flight2:req.query.flight
 				});
 				//res.send("<script>alert('评论成功!'); self.location = document.referrer;</script>").end();
 			}
@@ -598,7 +603,23 @@ router.get('/flight_booking', (req,res) => {
 				res.send("<script>alert('预定失败!');self.location = document.referrer;</script>").end();
 				//res.send("<script>alert('加载失败！');window.location.href='/user/login'</script>").end();
 			} else {
-				res.send("<script>alert('预定成功!');self.location = document.referrer;</script>").end();
+				bmodel.flight_show_info(req,res, (err, result) => {
+	    		if (err) {
+					console.log(err);
+					res.send("<script>alert('加载失败!');</script>").end();
+					//res.send("<script>alert('加载失败！');window.location.href='/user/login'</script>").end();
+				} else {
+					req.session.details = result;
+					res.render('./book/flight/main_flight1', {
+						//username: req.query.user,
+						details: result,
+						name:req.query.Name,
+						flight:req.query.flight,
+						flight1:req.query.flight1,
+						flight2:req.query.flight2
+					});
+				}
+	    	})
 				};
 			
 	});

@@ -306,11 +306,9 @@ exported.bookRoom = async function(req,res, callback) {
 			let sql3 = "update hotel_info set roomAllowance = roomAllowance - ?\
 			where hotelName = ? and type=2 ";
 			await conn.query(sql3,[double,name]);
-			let sql4 = "select* from order_form";
-	 		let ret = await conn.query(sql4);
-	 		console.log(ret[0].length);
+			
 			let sql5 = "insert into order_form values (?,2,1,?,?,?,0,?,null,null,0,null,null)";
-			await conn.query(sql5,[ret[0].length+1,name,price,address,date]);
+			await conn.query(sql5,[utils.createDealRecord(),name,price,address,date]);
 			
 			//let sql4 = "insert into order_form values( ,2,1,)"
 			callback(undefined, "ok");
@@ -573,11 +571,9 @@ exported.flight_booking = async(req, res, callback) => {
 		let address=req.query.address
 		var date = new Date();
 		date.toLocaleString( );
-		let sql = "select* from order_form";
- 		let ret = await conn.query(sql);
- 		console.log(ret[0].length);
+		
 		let sql2 = "insert into order_form values (?,2,1,?,?,?,0,?,null,null,0,null,null)";
-		await conn.query(sql2,[ret[0].length+1,name,price,address,date]);
+		await conn.query(sql2,[utils.createDealRecord(),name,price,address,date]);
 		let sql3 = "update flight_info set ticketAllowance = ticketAllowance - 1\
 			where flightName = ?";
 		await conn.query(sql3,[req.query.flightName]);

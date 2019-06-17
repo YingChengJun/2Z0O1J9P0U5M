@@ -52,7 +52,6 @@ router.post("/resetpwd2", function(req, res) {
 
 router.post("/queryOrder", function(req, res) {
   console.log("test");
-
   amodel.queryOrder(req, function(err, ret) {
     if (err) {
       console.log(err);
@@ -215,7 +214,19 @@ router.get("/change_passwd", (req, res) => {
   } else res.render("account/resetpwd2");
 });
 
-router.post("/transaction_select", (req, res) => {
+router.get("/deal_record", (req, res) => {
+  if (!req.session.token) {
+    res.redirect("/account/login");
+    //res.send("<script>alert('登录态过期，请重新登录！');</script>").end();
+    return;
+  } else {
+    res.render("account/deal_record", {
+      typeOfUser: req.session.token.typeOfUser
+    });
+  }
+});
+
+router.post("/deal_record", (req, res) => {
   console.log("test");
   amodel.selectOrder(req, function(err, ret) {
     if (err) {

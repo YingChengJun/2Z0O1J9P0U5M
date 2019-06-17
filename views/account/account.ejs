@@ -10,7 +10,7 @@
   <meta name="keywords"
         content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
   <meta name="author" content="PIXINVENT">
-  <title>Overview - Robust Admin Template</title>
+  <title>修改个人信息</title>
   <script type="text/javascript">var typeOfUser="";</script>
   <script> typeOfUser = "<%=typeOfUser%>" </script>
   <link rel="apple-touch-icon" sizes="60x60" href="../app-assets/images/ico/apple-icon-60.png">
@@ -105,15 +105,17 @@
           </li>
           <li><a href="balance" data-i18n="nav.dash.main" class="menu-item">余额与充值</a>
           </li>
+          <li><a href="deal_record" data-i18n="nav.dash.main" class="menu-item">交易记录</a>
+          </li>
           <% if(typeOfUser==3) { %> <li><a href="admin" data-i18n="nav.dash.main" class="menu-item">管理后台</a></li> <%} %>
           </li>
         </ul>
       </li>
       </li>
-      <li class=" nav-item"><a href="/book/bookhome"><i class="icon-android-menu"></i><span
+      <li class=" nav-item"><a href="/book/hotel_hotelsearch"><i class="icon-android-menu"></i><span
                   data-i18n="" class="menu-title">在线预定</span></a>
       </li>
-      <li class=" nav-item"><a href="transaction"><i class="icon-folder3"></i><span data-i18n=""
+      <li class=" nav-item"><a href="/payment"><i class="icon-folder3"></i><span data-i18n=""
                                                                                     class="menu-title">我的订单</span></a>
       </li>
     </ul>
