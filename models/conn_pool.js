@@ -5,7 +5,7 @@ module.exports = (function() {
 		host: 'localhost',
 		user: 'root',
 		password: '',
-		database: 'opmysystem',
+		database: 'opmsystem',
 		port: '3306',
 		charset: 'utf8mb4'
 	});
