@@ -194,12 +194,6 @@
   <script src="../app-assets/vendors/js/ui/affix.js" type="text/javascript"></script>
   <!-- END PAGE LEVEL JS-->
   <script type="text/javascript">
-    $(document).ready(function () {
-      if (sessionStorage.getItem('loggedIn'))
-        document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 退出";
-      else
-        document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 登录";
-    });
     $("#login-btn").click(function () {
       if (sessionStorage.getItem('loggedIn'))
         $.post("/exit", function (data) {
@@ -247,12 +241,6 @@
 
   </script>
   <script type="text/javascript">
-    $(document).ready(function () {
-      if (sessionStorage.getItem('loggedIn'))
-        document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 退出";
-      else
-        document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 登录";
-    })
     $("#login-btn").click(function () {
       if (sessionStorage.getItem('loggedIn'))
         $.post("/account/exit", function (data) {

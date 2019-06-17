@@ -2,14 +2,13 @@ let express = require('express');
 let router = express.Router();
 let mysql = require('mysql');
 
-// set database
-// let con = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: '',
-//     port: '3306'
-// });
+let con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'opmsystem',
+    port: '3306'
+});
 
 router.get('/', function(req, res, next) {
     if(!req.session.token){
@@ -29,6 +28,14 @@ router.get('/', function(req, res, next) {
         if (err) {
             console.log(err);
         }
+        rows.forEach((item)=>{
+            if(item.typeOfUser == 1)
+                item.typeOfUser = 'Buyer';
+            else if(item.typeOfUser == 2)
+                item.typeOfUser = 'Seller';
+            else if(item.typeOfUser == 3)
+                item.typeOfUser = 'Admin';
+        });
         var data = rows;
         res.render('account/admin', {data: data, user: user });
     });

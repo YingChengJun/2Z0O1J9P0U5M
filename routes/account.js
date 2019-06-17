@@ -243,9 +243,6 @@ router.get("/error", (req, res) => {
   res.render("error");
 });
 
-router.get("/admin", (req, res) => {
-  res.redirect("admin");
-});
 
 router.get("/refund", (req, res) => {
   res.render("account/refund");
