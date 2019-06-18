@@ -180,7 +180,13 @@ function onSearchAll()
       <div class="card">
 
         <div class="card-header">
-          <h4 id="basic-forms" class="card-title"><%= details[1].created_time %></h4>
+          <% if (details.length==0) { %>
+            <h4 id="basic-forms" class="card-title">
+            无记录</h4>
+            <% } else { %>
+            <h4 id="basic-forms" class="card-title">
+            <%= details[0].created_time %></h4>
+          <% } %>
           <div class="heading-elements">
             <ul class="list-inline mb-0">
              <li>input the check order id &nbsp </li>
