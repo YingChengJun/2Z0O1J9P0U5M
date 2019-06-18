@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+  <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+  <meta name="author" content="PIXINVENT">
+  <title>每日对账</title>
+  <link rel="apple-touch-icon" sizes="60x60" href="../app-assets/images/ico/apple-icon-60.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../app-assets/images/ico/apple-icon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="../app-assets/images/ico/apple-icon-120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../app-assets/images/ico/apple-icon-152.png">
+  <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
+  <link rel="shortcut icon" type="image/png" href="../app-assets/images/ico/favicon-32.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- BEGIN VENDOR CSS-->
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap.css">
+  <!-- font icons-->
+  <link rel="stylesheet" type="text/css" href="../app-assets/fonts/icomoon.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/extensions/pace.css">
+  <!-- END VENDOR CSS-->
+  <!-- BEGIN ROBUST CSS-->
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/bootstrap-extended.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/app.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/colors.css">
+  <!-- END ROBUST CSS-->
+  <!-- BEGIN Page Level CSS-->
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+  <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/documentation.css">
+  <!-- END Page Level CSS-->
+  <!-- BEGIN Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+  <style>
+.input_test{ width: 125px; height:22px; }</style>
+</head>
+
+
+<script type="text/javascript">
+  function onSearch(obj)
+  {
+    setTimeout(function()
+    {
+      var storeId = document.getElementById('order_list');
+      var rowsLength = storeId.rows.length;
+      var key = obj.value;
+      var searchCol = 0;
+      for(var i=1;i<rowsLength;i++)
+      {
+        var searchText = storeId.rows[i].cells[searchCol].innerHTML;
+        if(searchText.match(key))
+        {
+          storeId.rows[i].style.display='';
+        }
+        else
+        {
+          storeId.rows[i].style.display='none';
+        }
+      }
+    },200);
+  }
+
+  function onSearchBtn(obj)
+  {
+    setTimeout(function()
+    {
+      var storeId = document.getElementById('order_list');
+      var rowsLength = storeId.rows.length;
+      var key = obj;
+      var searchCol = 7;
+      for(var i=1;i<rowsLength;i++)
+      {
+        var searchText = storeId.rows[i].cells[searchCol].innerHTML;
+        if(searchText.match(key))
+        {
+          storeId.rows[i].style.display='';
+        }
+        else
+        {
+          storeId.rows[i].style.display='none';
+        }
+      }
+    },200);
+  }
+
+  function test() {
+    var id, password;
+    id = prompt("????????:");
+    password = prompt("?????:");
+
+    var mysql = require('mysql');
+    var connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      port: '3306',
+      database: 'account'
+    });
+    connection.connect();
+    var sql1 = "SELECT * FROM checker WHERE id = " + id + ";";
+    connection.query(sql1, function (err, result) 
+    {
+      if (err) {
+        alert("???????!");
+        return;
+      }
+      var sql2 = "SELECT * FROM checker WHERE id = " + id + " and password = " + password + ";";
+      connection.query(sql2, function (err, result) 
+      {
+        if (err) {
+          alert("??????!");
+          return;
+        }
+        alert("????!");
+      }
+    }                  
+    connection.end();
+  }
+
+  function edit(element) {
+    var oldhtml = element.innerHTML;
+    var newobj = document.createElement('input');
+    newobj.type = 'text';
+    newobj.onblur = function () {
+      element.innerHTML = this.value ? this.value : oldhtml;
+    }
+    element.innerHTML = '';
+    element.appendChild(newobj);
+    newobj.focus();
+  }
+</script>
+
+
+<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
+
+<nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-semi-dark navbar-shadow">
+  <div class="navbar-wrapper">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav">
+        <li class="nav-item"><a href="/" class="navbar-brand nav-link">在线交易系统</a></li>
+        <li class="nav-item hidden-md-up float-xs-right">
+          <a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container">
+            <i class="icon-ellipsis pe-2x fa-rotate-90"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="navbar-container content">
+      <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
+        <ul class="nav navbar-nav">
+          <li class="nav-item hidden-sm-down">
+            <a class="nav-link nav-menu-main menu-toggle hidden-xs">
+              <i class="icon-menu5"></i>
+            </a>
+          </li>
+          <li class="nav-item hidden-sm-down">
+            <a href="#" class="nav-link nav-link-expand">
+              <i class="ficon icon-expand2"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+  <div class="main-menu-content menu-accordion">
+    <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+      <li class="nav-item"><a href="/"><i class="icon-home3"></i><span data-i18n="nav.dash.main"
+        class="menu-title">我的账户</span></a>
+      </li>
+      <li class="nav-item"><a href="./update"><i class="icon-home3"></i><span data-i18n="nav.dash.main"
+        class="menu-title">修改流水</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="app-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-body">
+
+      <% for (var i = 0; i < details.length; i++) { %>
+
+      <div class="card">
+
+        <div class="card-header">
+          <h4 id="basic-forms" class="card-title"><%= details[1].created_time %></h4>
+          <div class="heading-elements">
+            <ul class="list-inline mb-0">
+             <li>input the check order id &nbsp </li>
+             <li> <input name="key" type="text" id="key" onkeydown="onSearch(this)" class="input_test" value="" /></li>
+             <li>&nbsp &nbsp &nbsp show mode &nbsp </li>
+             <li><a href="javascript:void(0);" onclick="onSearchBtn('1')" target="_blank" class="btn btn-success">correct</a></li>
+             <li><a href="javascript:void(0);" onclick="onSearchBtn(2)" target="_blank" class="btn btn-warning">updated</a></li>
+             <li><a href="javascript:void(0);" onclick="onSearchBtn(3)" target="_blank" class="btn btn-danger">wrong</a></li>
+           </ul>
+         </div>
+       </div>
+
+       <div class="card-body collapse in" aria-expanded="true">
+        <div class="card-block">
+          <div class="table-responsive" >
+
+            <table class="table table-hover table-striped" id="order_list">
+
+              <tbody>
+                <th>deal_id</th>
+                <th>order_id</th>
+                <th>from_id</th>
+                <th>to_id</th>
+                <th>amount</th>
+                <th>infomation</th>
+                <th>created_time</th>
+                <th>transaction_status</th>
+
+                <tr>
+                  <% if (details[i].transaction_status==1) {%>
+                  <td><font color="37BC9B"><a onclick="test()"><%= details[i].deal_id %></a></font></td>
+                  <% } else if (details[i].transaction_status==2) { %>
+                  <td><font color="F6BB42"><a onclick="test()"><%= details[i].deal_id %></a></font></td>
+                  <% } else if (details[i].transaction_status==3) { %>
+                  <td><font color="DA4453"><a href="check_order_update.ejs" onclick="test()"><%= details[i].deal_id %></a></font></td>
+                  <% } %>
+                  <td><%= details[i].order_id %></td>
+                  <td><%= details[i].from_id %></td>
+                  <td><%= details[i].to_id %></td>
+                  <td><%= details[i].amount %></td>
+                  <td><%= details[i].infomation %></td>
+                  <td><%= details[i].created_time %></td>
+                  <td><%= details[i].transaction_status %></td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <% } %>
+  </div>
+</div>
+</div>
+
+
+</body>  
+</html>

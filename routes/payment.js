@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
 				});
 			}
 		});	
-	} else res.send("<script>alert('好像你的身份不能访问呢!');</script>").end();
+	} else res.send("<script>alert('好像你的身份不能访问呢!');window.location.href='/account';</script>").end();
 });
 
 router.post('/confirmReceived', (req, res) => {

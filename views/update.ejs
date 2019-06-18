@@ -53,12 +53,6 @@
   <div class="navbar-wrapper">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
-        <!-- <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1">
-                <div class="bs-callout-info callout-border-left mt-1 p-1">
-                <strong>Great Job!</strong>
-                <p>Biscuit macaroon tootsie roll croissant. Dessert candy canes halvah cookie liquorice. Candy canes muffin gummies jujubes brownie. Pie cake pie pastry sugar plum jelly apple pie cotton candy.</p></i>
-              </div></a></li> -->
-        <!-- <li class="nav-item"><a href="index" class="navbar-brand nav-link"><img alt="branding logo" src="../app-assets/images/logo/robust-logo-light.png" data-expand="../app-assets/images/logo/robust-logo-light.png" data-collapse="../app-assets/images/logo/robust-logo-small.png" class="brand-logo"></a></li> -->
         <li class="nav-item"><a href="" class="navbar-brand nav-link">在线支付系统</a></li>
         <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile"
                                                             class="nav-link open-navbar-container"><i class="icon-ellipsis pe-2x fa-rotate-90"></i></a></li>
@@ -76,7 +70,7 @@
           <li class="nav-item">
             <button id="login-btn" class="btn btn-success btn-doc-header" type="button">
               <i class="icon-bag3"></i>
-              登陆
+              登录
             </button></li>
           <li class="nav-item"><a href="account" target="_blank" class="btn btn-success btn-doc-header"><i
                       class="icon-bag3"></i> 我的</a></li>
@@ -107,7 +101,7 @@
           </li>
           <li><a href="deal_record" data-i18n="nav.dash.main" class="menu-item">交易记录</a>
           </li>
-          <% if(typeOfUser==3) { %> <li><a href="admin" data-i18n="nav.dash.main" class="menu-item">管理后台</a></li>  <li><a href="/check" data-i18n="nav.dash.main" class="menu-item">用户对账</a></li> <%} %>
+          <% if(typeOfUser==3) { %> <li><a href="admin" data-i18n="nav.dash.main" class="menu-item">管理后台</a></li> <%} %>
           </li>
         </ul>
       </li>
@@ -130,7 +124,7 @@
     <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-xs-12 mb-1">
-          <h2 class="content-header-title">修改信息</h2>
+          <h2 class="content-header-title">订单详情</h2>
         </div>
       </div>
       <div class="content-body">
@@ -154,98 +148,79 @@
               </div>
               <div class="card-body collapse in">
                 <div class="card-block">
-                  <div class="card-text">
-                    <p>基本信息包括您的姓名，邮箱，手机号码和照片等基本个人信息。您可以在以下表格中修改并点击提交按钮。</p>
-                  </div>
                   <form class="form">
                     <div class="form-body">
-                      <h4 class="form-section"><i class="icon-head"></i><%= username %></h4>
-                      <div class="row">
+                      <h4 class="form-section"><i class="icon-list"></i><%= deal_id %></h4>
+                          
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput1">姓名</label>
-                            <input type="text" id="realName" class="form-control" placeholder="First Name"
-                                   name="fname" value=<%= realName %>>
+                            <label for="projectinput1">订单号</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= order_id %>>
                           </div>
                         </div>
+                    </div>     
+                    
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput2">证件号码</label>
-                            <input type="text" id="licenseNumber" class="form-control" placeholder="Last Name"
-                                   name="lname" value=<%= licenseNumber %>>
+                            <label for="projectinput1">卖家ID</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= seller_id %>>
                           </div>
                         </div>
-                      </div>
-                      <div class="row">
+                    </div>    
+                    
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput3">E-mail</label>
-                            <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
-                                   value=<%= emailAddr %>>
+                            <label for="projectinput1">买家ID</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= buyer_id %>>
                           </div>
                         </div>
+                    </div>    
+                          
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput4">手机号码</label>
-                            <input type="text" id="phoneNumber" class="form-control" placeholder="Phone" name="phone"
-                                   value=<%= phoneNumber %>>
+                            <label for="projectinput1">金额</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= amount %>>
                           </div>
                         </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="date-of-birth">出生日期</label>
-                        <input type="date" id="dateOfBirth" class="form-control" placeholder="Company Name"
-                               name="company" value=<%= dateOfBirth %>>
-                      </div>
-
-                      <h4 class="form-section"><i class="icon-clipboard4"></i>其他信息</h4>
-
-
-                      <div class="row">
+                    </div>        
+                          
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput5">兴趣</label>
-                            <select id="projectinput5" name="interested" class="form-control">
-                              <option value="none" selected="" disabled="">Interested in</option>
-                              <option value="design">艺术设计</option>
-                              <option value="development">软件开发</option>
-                            </select>
+                            <label for="projectinput1">成交时间</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= created_time %>>
                           </div>
                         </div>
-
+                    </div>         
+                          
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="projectinput6">收入情况</label>
-                            <select id="projectinput6" name="budget" class="form-control">
-                              <option value="0" selected="" disabled="">Budget</option>
-                              <option value="less than 5000$">少于 5000$</option>
-                              <option value="5000$ - 10000$">5000$ - 10000$</option>
-                              <option value="10000$ - 20000$">10000$ - 20000$</option>
-                              <option value="more than 20000$">多于 20000$</option>
-                            </select>
+                            <label for="projectinput1">订单内容</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= infomation %>>
                           </div>
                         </div>
-
+                    </div>        
+                    
+                    <div class="row"> 
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>选择头像</label>
-                            <label id="projectinput7" class="file center-block">
-                              <input type="file" id="file">
-                              <span class="file-custom"></span>
-                            </label>
+                            <label for="projectinput1">成交状态</label>
+                              <input type="text" id="emailAddr" class="form-control" placeholder="E-mail" name="email"
+                                   value=<%= transaction_status %>>
                           </div>
                         </div>
-
-                      </div>
-
-
-                      <div class="form-group">
-                        <label for="projectinput8">备注</label>
-                        <textarea id="projectinput8" rows="5" class="form-control" name="comment"
-                                  placeholder="About Project"></textarea>
-                      </div>
-                    </div>
+                    </div>    
 
                     <div class="form-actions">
                       <button id="cancle" type="button" class="btn btn-warning mr-1">
@@ -299,83 +274,16 @@
 <script src="../app-assets/vendors/js/ui/affix.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
 <script type="text/javascript">
-  $(document).ready(function () {
-    if (sessionStorage.getItem('loggedIn'))
-      document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 退出";
-    else
-      document.getElementById("login-btn").innerHTML = "<i class=\"icon-bag3\"></i> 登录";
-  })
-  $("#login-btn").click(function () {
-    if (sessionStorage.getItem('loggedIn'))
-      $.post("/account/exit", function (data) {
-        if (data.status == 1) {
-          alert("登出成功");
-          sessionStorage.clear();
-          window.location.href="/account/login";
-        }
-        if (data.status == 0) alert("登出失败");
-      });
-    else
-      window.location.href = "/account/login";
-  });
+
   $("#submit").click(function () {
-    let d = $("#emailAddr").val();
-    let e = $("#phoneNumber").val();
-    let f = $("#realName").val();
-    let g = $("#licenseNumber").val();
-    let h = $("#dateOfBirth").val();
-
-    if(! /^[a-zA-Z0-9_]+?@[a-zA-Z0-9_]+?(\.[a-zA-Z0-9_]+?)+$/.test(d))
-    {
-      alert("邮箱地址不合法");
-      return ;
-    }
-
-    if(e[0]!='1' || e.length!=11)
-    {
-      alert("手机号不合法");
-      return ;
-    }
-
-    var tempres=0;
     $.ajax({
       dataType: "JSON",
-      data: { cardid:g },
-      url: "/account/checkcardid",
-      type: "POST",
-      async: false,
-      success: function (data) {
-        tempres=data.status;
-      }
-    });
-    if(!tempres)
-    {
-      alert("证件号码不合法");
-      return ;
-    }
-
-    $.ajax({
-      dataType: "JSON",
-      data: {
-        emailAddr: d,
-        phoneNumber: e,
-        realName: f,
-        licenseNumber: g,
-        dateOfBirth: h,
-      },
-      url: "/account/updateinfo",
+      data: { },
+      url: "/account/check_order_update",
       type: "POST",
       success: function (data) {
-        if (data.status == 1) {
-          window.location.href = "/account/account";
+          window.location.href = "/check/check_order_daily";
           alert("修改成功");
-        }
-        else if (data.status == 0) {
-          alert("非法输入");
-        }
-        else if (data.status == -1) {
-          alert("服务器错误");
-        }
       }
     });
   });

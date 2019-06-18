@@ -11,6 +11,8 @@ let accountRouter = require('./routes/account'); //样例理由
 let bookRouter    = require('./routes/book');    //在线预订路由
 let adminRouter = require('./routes/admin'); // backend router
 let indexRouter = require('./routes/index'); // backend router
+var checkRouter = require('./routes/check');
+var updateRouter = require('./routes/update');
 //============================================================
 
 let app = express();
@@ -30,11 +32,14 @@ app.use(session({secret: 'recommand 128 bytes random string', // 建议使用 12
 app.use(express.static(path.join(__dirname, 'public')));
 
 //============================================================
+app.use('/book', bookRouter);
+app.use('/check', checkRouter);
+app.use('/update', updateRouter);
 app.use('/payment', paymentRouter);  //支付处理路由
 app.use('/account', accountRouter);   //账户管理路由
 app.use('/account/admin', adminRouter);   //管理路由
-app.use('/', indexRouter);  //支付处理路由
-app.use('/book', bookRouter);
+app.use('/', indexRouter);
+
 //============================================================
 
 app.use(function(req, res, next) {
