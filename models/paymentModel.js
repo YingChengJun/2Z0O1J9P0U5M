@@ -121,6 +121,7 @@ exported.payfor_orders = async(req, res, callback) => {
 	//Step0: 交易安全认证
 	//Step1: 转账到中间账户
 	//Step2: 生成交易流水
+	console.log(req.body.order_id);
 	await conn.beginTransaction();  //事务
 	try {
 		let sql = "select balance from user where id = ? and payPassword = ?";

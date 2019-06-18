@@ -295,7 +295,7 @@
   			data: {
   				dynamic: $("input[name='dynamic']").val(),
   				paypwd: $("input[name='paypwd']").val(),
-          order_id: <%= details.order_id %>  //不能加密，防止其他人得到加密方式，明文后端二次确认即可
+          order_id: "<%= details.order_id %>"  //不能加密，防止其他人得到加密方式，明文后端二次确认即可
   			},
   			dataType: "JSON",
   			success: function(data){
