@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 			res.send("<script>alert('获取订单信息失败!');</script>").end();
 		} else {
 			res.render('check', {
-				details: ret,
+				details: ret[0],
 				typeOfUser: req.session.token.typeOfUser
 			});
 		}

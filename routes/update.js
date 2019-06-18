@@ -11,7 +11,7 @@ router.post("/update", function(req, res) {
     if (err) {
       console.log(err);
       res.send({ status: -1 }).end(); //服务器异常
-    } else {
+    } else { 
       console.log(ret);
       if (ret < 0) {
         res.send({ status: 0 }).end(); //缺少信息
