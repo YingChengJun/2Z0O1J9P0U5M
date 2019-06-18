@@ -254,10 +254,11 @@ exported.hotel_comments = async(req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
 		let name=req.query.hotelName;
+		let id=req.session.token.username;
 		console.log(name);
-		let sql = "insert into hotel_com values (?,'嘤菜鸡',?)";
+		let sql = "insert into hotel_com values (?,?,?)";
 		let mycomments = req.query.mycomments;
-		await conn.query(sql,[name,mycomments]);
+		await conn.query(sql,[name,id,mycomments]);
 		callback(undefined, "ok!");
 	} catch (err) {
 		console.log(err);
@@ -295,6 +296,7 @@ exported.bookRoom = async function(req,res, callback) {
 			let checkin = req.query.checkin;
 			let checkout = req.query.checkout;
 			let address=req.query.address;
+			let buyerid=req.session.token.uid;
 			var date = new Date();
 			date.toLocaleString( );
 			let sql1 = "update hotel_info set roomAllowance = roomAllowance - ?\
@@ -307,8 +309,8 @@ exported.bookRoom = async function(req,res, callback) {
 			where hotelName = ? and type=2 ";
 			await conn.query(sql3,[double,name]);
 			
-			let sql5 = "insert into order_form values (?,2,1,?,?,?,0,?,null,null,0,null,null)";
-			await conn.query(sql5,[utils.createDealRecord(),name,price,address,date]);
+			let sql5 = "insert into order_form values (?,2,?,?,?,?,0,?,null,null,0,null,null)";
+			await conn.query(sql5,[utils.createDealRecord(),buyerid,name,price,address,date]);
 			
 			//let sql4 = "insert into order_form values( ,2,1,)"
 			callback(undefined, "ok");
@@ -534,10 +536,12 @@ exported.flight_comments = async(req, res, callback) => {
 	const conn = await pool.getConnection();
 	try {
 		let name=req.query.flightName;
+		let id=req.session.token.username;
 		console.log(name);
-		let sql = "insert into flight_com values (?,'嘤菜鸡',?)";
+		console.log(id);
+		let sql = "insert into flight_com values (?,?,?)";
 		let mycomments = req.query.mycomments;
-		await conn.query(sql,[name,mycomments]);
+		await conn.query(sql,[name,id,mycomments]);
 		callback(undefined, "ok!");
 	} catch (err) {
 		console.log(err);
@@ -568,12 +572,13 @@ exported.flight_booking = async(req, res, callback) => {
 	try {
 		let name=req.query.flightName+"航班";
 		let price=req.query.flightPrice;
-		let address=req.query.address
+		let address=req.query.address;
+		let buyerid=req.session.token.uid;
 		var date = new Date();
 		date.toLocaleString( );
 		
-		let sql2 = "insert into order_form values (?,2,1,?,?,?,0,?,null,null,0,null,null)";
-		await conn.query(sql2,[utils.createDealRecord(),name,price,address,date]);
+		let sql2 = "insert into order_form values (?,2,?,?,?,?,0,?,null,null,0,null,null)";
+		await conn.query(sql2,[utils.createDealRecord(),buyerid,name,price,address,date]);
 		let sql3 = "update flight_info set ticketAllowance = ticketAllowance - 1\
 			where flightName = ?";
 		await conn.query(sql3,[req.query.flightName]);
