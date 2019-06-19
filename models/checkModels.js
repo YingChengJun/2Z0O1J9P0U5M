@@ -87,27 +87,6 @@ exported.comp_info = async function(){
               else if(dealRcd[0].length==2){
               // 无需人工
                 if(price==Rcd[0].amount){
-                  //退款
-                  if(buyer_id==Rcd[0].from_id&&buyer_id==Rcd[1].to_id){
-                      param2=[5,param1];
-                      param3=[2,param1];
-                      await connection.query(sqlUO,param2,function(err,rows){
-                        if(err) throw err;
-                        else{
-                          console.log(rows[0]);
-                        }
-                      })
-                      await connection.query(sqlUD,param3,function(err,rows){
-                        if(err) throw err;
-                        else{
-                          console.log(rows[0]);
-                        }
-                      })
-                      console.log("有2条交易流水，但显示未付款，将订单状态修改为4。");
-                      console.log("有已经核对且自动修改，将流水状态修改为2");
-                    }
-                    //A->B,B->C
-                  else if(buyer_id==Rcd[0].from_id&&seller_id==Rcd[1].to_id){
                       param2=[3,param1];
                       param3=[2,param1];
                       await connection.query(sqlUO,param2,function(err,rows){
@@ -124,31 +103,9 @@ exported.comp_info = async function(){
                       })
                     console.log("有2条交易流水，但显示未付款，将订单状态修改为3。");
                     console.log("有已经核对且自动修改，将流水状态修改为2");
-                  }
                 }
               // 需要人工
                 else if(price!=Rcd[0].amount){
-                  //退款
-                  if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==buyer_id){
-                      param2=[5,param1];
-                      param3=[3,param1];
-                      await connection.query(sqlUO,param2,function(err,rows){
-                        if(err) throw err;
-                        else{
-                          console.log(rows[0]);
-                        }
-                      })
-                      await connection.query(sqlUD,param3,function(err,rows){
-                        if(err) throw err;
-                        else{
-                          console.log(rows[0]);
-                        }
-                      })
-                      console.log("有2条交易流水，但显示未付款，将订单状态修改为4。");
-                      console.log("金额出现差池需要修改，将流水状态修改为3");
-                   }
-                  //完成
-                  else if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==seller_id){
                     param2=[3,param1];
                       param3=[3,param1];
                       await connection.query(sqlUO,param2,function(err,rows){
@@ -165,35 +122,13 @@ exported.comp_info = async function(){
                       })
                     console.log("有2条交易流水，但显示未付款，将订单状态修改为3。");
                     console.log("金额出现差池需要修改，将流水状态修改为3");
-                   }
                 }
               }
             break;
-            case 1:case 2:case 4:
+            case 1:case 2:
               if(dealRcd[0].length==2){
                 // 无需人工
                   if(price==Rcd[0].amount){
-                    //退款
-                    if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==buyer_id){
-                        param2=[5,param1];
-                        param3=[2,param1];
-                        await connection.query(sqlUO,param2,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        await connection.query(sqlUD,param3,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        console.log("有2条交易流水，但显示未付款，将订单状态修改为4。");
-                        console.log("有已经核对且自动修改，将流水状态修改为2");
-                      }
-                      //A->B,B->C
-                    else if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==seller_id){
                         param2=[3,param1];
                         param3=[2,param1];
                         await connection.query(sqlUO,param2,function(err,rows){
@@ -210,35 +145,10 @@ exported.comp_info = async function(){
                         })
                       console.log("有2条交易流水，但显示未付款，将订单状态修改为3。");
                       console.log("有已经核对且自动修改，将流水状态修改为2");
-                    }
+                    
                   }
                 // 需要人工
                   else if(price!=Rcd[0].amount){
-                    console.log("需要人工后续");
-                    //退款
-                    console.log(Rcd[0].from_id);
-                    console.log(Rcd[1].to_id);
-                    if(buyer_id==Rcd[0].from_id&&buyer_id==Rcd[1].to_id){
-                        param2=[5,param1];
-                        param3=[3,param1];
-                        await connection.query(sqlUO,param2,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        await connection.query(sqlUD,param3,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        console.log("有2条交易流水，但显示未付款，将订单状态修改为4。");
-                        console.log("金额出现差池需要修改，将流水状态修改为3");
-                     }
-                    //完成
-                    else if(buyer_id==Rcd[0].from_id&&seller_id==Rcd[1].to_id){
-                      console.log("完成");
                       param2=[3,param1];
                       param3=[3,param1];
                         await connection.query(sqlUO,param2,function(err,rows){
@@ -255,32 +165,54 @@ exported.comp_info = async function(){
                         })
                       console.log("有2条交易流水，但显示未付款，将订单状态修改为3。");
                       console.log("金额出现差池需要修改，将流水状态修改为3");
-                     }
                   }
               }
               else if(dealRcd[0].length==1){
-                //console.log(rows);
-                //console.log(rows[0].amount);
-                if(price==Rcd[0].amount){
-                  param3=[1,param1];
-                  await connection.query(sqlUD,param3,function(err,rows){
-                  if(err) throw err;
+                if(buyer_id==Rcd[0].buyer_id){
+                  if(price==Rcd[0].amount){
+                    param3=[1,param1];
+                    await connection.query(sqlUD,param3,function(err,rows){
+                    if(err) throw err;
+                      else{
+                        console.log(rows[0]);
+                      }
+                    })
+                    console.log("正确，将流水状态修改为1");
+                  }
+                  else{
+                    param3=[3,param1];
+                    await connection.query(sqlUD,param3,function(err,rows){
+                    if(err) throw err;
                     else{
                       console.log(rows[0]);
-                    }
-                  })
-                  console.log("正确，将流水状态修改为1");
+                      }
+                    })
+                    console.log("金额出现差池需要修改，将流水状态修改为3");
+                  }
                 }
                 else{
-                  param3=[3,param1];
-                  await connection.query(sqlUD,param3,function(err,rows){
-                  if(err) throw err;
+                  if(price==Rcd[0].amount){
+                    param3=[3,param1];
+                    await connection.query(sqlUD,param3,function(err,rows){
+                    if(err) throw err;
+                    else{
+                      console.log(rows[0]);
+                      }
+                    })
+                    console.log("买家出现差池需要修改，将流水状态修改为3");
+                  }
                   else{
-                    console.log(rows[0]);
-                    }
-                  })
-                  console.log("金额出现差池需要修改，将流水状态修改为3");
+                    param3=[3,param1];
+                    await connection.query(sqlUD,param3,function(err,rows){
+                    if(err) throw err;
+                    else{
+                      console.log(rows[0]);
+                      }
+                    })
+                    console.log("买家和金额出现差池需要修改，将流水状态修改为3");
+                  }
                 }
+                
               }
               else if(dealRcd[0].length==0){
                       param2=[0,param1];
@@ -293,23 +225,10 @@ exported.comp_info = async function(){
                       console.log("无交易流水，但显示已付款，将订单状态修改为0");
               }
             break;
-            case 3:
+            case 3:case 4:
               if(dealRcd[0].length==2){
                 // 无需人工
                   if(price==Rcd[0].amount){
-                    //退款
-                    if(buyer_id==Rcd[0].from_id&&buyer_id==Rcd[1].to_id){
-                        param2=[5,param1];
-                        await connection.query(sqlUO,param2,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        console.log("有2条交易流水，但显示资金流向为买家->中间->买家，将订单状态修改为4。");
-                      }
-                    //完成 
-                    else if(buyer_id==Rcd[0].from_id&&seller_id==Rcd[1].to_id){
                         param3=[1,param1];
                         await connection.query(sqlUD,param3,function(err,rows){
                           if(err) throw err;
@@ -318,31 +237,10 @@ exported.comp_info = async function(){
                           }
                         })
                       console.log("有两条流水，且显示资金流向为买家->中间->卖家，正确订单");
-                    }
+
                   }
                 // 需要人工
                   else if(price!=Rcd[0].amount){
-                    //退款
-                    if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==buyer_id){
-                        param2=[5,param1];
-                        param3=[3,param1];
-                        await connection.query(sqlUO,param2,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        await connection.query(sqlUD,param3,function(err,rows){
-                          if(err) throw err;
-                          else{
-                            console.log(rows[0]);
-                          }
-                        })
-                        console.log("有2条交易流水，但显示未付款，将订单状态修改为4。");
-                        console.log("金额出现差池需要修改，将流水状态修改为3");
-                     }
-                    //完成
-                    else if(Rcd[0].form_id==buyer_id&&Rcd[1].to_id==seller_id){
                         param3=[3,param1];
                         await connection.query(sqlUD,param3,function(err,rows){
                           if(err) throw err;
@@ -351,48 +249,85 @@ exported.comp_info = async function(){
                           }
                         })
                       console.log("金额出现差池需要修改，将流水状态修改为3");
-                     }
                   }
-                }
+              }
               else if(dealRcd[0].length==1){
-                //console.log(rows);
-                //console.log(rows[0].amount);
-                if(price==Rcd[0].amount){
-                  param2=[2,param1];
-                  param3=[2,param1];
-                  await connection.query(sqlUO,param2,function(err,rows){
-                    if(err) throw err;
+                  if(buyer_id==Rcd[0].buyer_id){
+                    if(price==Rcd[0].amount){
+                      param2=[2,param1];
+                      param3=[2,param1];
+                      await connection.query(sqlUO,param2,function(err,rows){
+                        if(err) throw err;
+                          else{
+                            console.log(rows[0]);
+                          }
+                        })
+                      await connection.query(sqlUD,param3,function(err,rows){
+                      if(err) throw err;
+                        else{
+                          console.log(rows[0]);
+                        }
+                      })
+                      console.log("修改订单状态状态为2待发货");
+                      console.log("将流水状态修改为2");
+                    }
+                    else{
+                      param2=[2,param1];
+                      param3=[3,param1];
+                      await connection.query(sqlUO,param2,function(err,rows){
+                        if(err) throw err;
+                        else{
+                          console.log(rows[0]);
+                          }
+                        })
+                      await connection.query(sqlUD,param3,function(err,rows){
+                      if(err) throw err;
                       else{
                         console.log(rows[0]);
-                      }
-                    })
-                  await connection.query(sqlUD,param3,function(err,rows){
-                  if(err) throw err;
-                    else{
-                      console.log(rows[0]);
+                        }
+                      })
+                      console.log("金额出现差池需要修改，将流水状态修改为3");
                     }
-                  })
-                  console.log("有1条交易流水，但显示交易已完成，自动修改，将订单状态修改为2");
-                  console.log("自动修改，将流水状态修改为2");
-                }
-                else{
-                  param2=[2,param1];
-                  param3=[3,param1];
-                  await connection.query(sqlUO,param2,function(err,rows){
-                    if(err) throw err;
-                      else{
-                        console.log(rows[0]);
-                      }
-                    })
-                  await connection.query(sqlUD,param3,function(err,rows){
-                  if(err) throw err;
-                    else{
-                      console.log(rows[0]);
+                  }
+                  else{
+                    if(price==Rcd[0].amount){
+                      param2=[2,param1];
+                      param3=[3,param1];
+                      await connection.query(sqlUO,param2,function(err,rows){
+                        if(err) throw err;
+                          else{
+                            console.log(rows[0]);
+                          }
+                        })
+                      await connection.query(sqlUD,param3,function(err,rows){
+                      if(err) throw err;
+                        else{
+                          console.log(rows[0]);
+                        }
+                      })
+                      console.log("修改订单状态状态为2待发货");
+                      console.log("将流水状态修改为3");
                     }
-                  })
-                  console.log("有1条交易流水，但显示交易已完成，将订单状态修改为2");
-                  console.log("金额出现差池需要修改，将流水状态修改为3");
-                }
+                    else{
+                      param2=[2,param1];
+                      param3=[3,param1];
+                      await connection.query(sqlUO,param2,function(err,rows){
+                        if(err) throw err;
+                          else{
+                            console.log(rows[0]);
+                          }
+                        })
+                      await connection.query(sqlUD,param3,function(err,rows){
+                      if(err) throw err;
+                        else{
+                          console.log(rows[0]);
+                        }
+                      })
+                      console.log("修改订单状态状态为2待发货");
+                      console.log("将流水状态修改为3");
+                    }
+                  }
+                  
               }
               else if(dealRcd[0].length==0){
                 param2=[0,param1];
@@ -405,7 +340,7 @@ exported.comp_info = async function(){
                 console.log("无交易流水，但显示已付款，将订单状态修改为0");
               }
             break;
-            case 5:
+           /* case 5:
               if(dealRcd[0].length==2){
                 // 无需人工
                   if(price==Rcd[0].amount){
@@ -514,7 +449,7 @@ exported.comp_info = async function(){
                   }
                 })
                 console.log("无交易流水，但显示已付款，将订单状态修改为0");
-              }
+              }*/
           }
       }   
   }catch(err){
