@@ -374,8 +374,15 @@ module.exports = {
   queryOrder: async function (req, callback) {
     try {
       const conn = await pool.getConnection();
-      let sql = "select * from deal_record";
-      let ret = await conn.query(sql);
+      let id = req.session.token.uid;
+      let typeOfUser = req.session.token.typeOfUser;
+      var sql;
+      if(typeOfUser == 1)
+        sql = "select * from deal_record where from_id = ?";
+      else if(typeOfUser == 2)
+        sql = "select * from deal_record where to_id = ?";
+
+      let ret = await conn.query(sql, id);
       //console.log(ret[0]);
 
       callback(undefined, ret[0]);
@@ -399,8 +406,12 @@ module.exports = {
 
         let start_time = '\'' + start_time_year + "-" + start_time_date.substring(0,2) + "-" + start_time_date.substr(2,4) + '\'';
         let end_time = '\'' + end_time_year + "-" + end_time_date.substring(0,2) + "-" + end_time_date.substr(2,4) + '\'';
-
-        let sql = "select * from deal_record where created_time between" + " " + start_time + " " + "and" + ' ' + end_time;
+        let id = req.session.token.uid;
+        var sql;
+        if(req.session.token.typeOfUser == 1)
+          sql = "select * from deal_record where from_id = " + id + " and created_time between" + " " + start_time + " " + "and" + ' ' + end_time + "";
+        else if(req.session.token.typeOfUser == 2)
+          sql = "select * from deal_record where to_id = " + id + " and created_time between" + " " + start_time + " " + "and" + ' ' + end_time + "";
 
         switch (sort_method) {
           case '0': sql += " order by order_id"; break;

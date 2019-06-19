@@ -9,7 +9,7 @@ exported.update =  async function (req, callback) {
       let to_id = req.body.toid;
       let amount = req.body.amount;
       let sql = "UPDATE deal_record SET from_id = ?,to_id = ?,amount = ?, transaction_status = ? WHERE deal_id = ?";
-      let param = [from_id ,to_id ,amount ,2 ,deal_id ]
+      let param = [from_id ,to_id ,amount ,2 ,deal_id ];
       let ret = await connection.query(sql,param);
       callback(undefined, ret[0]);
     } catch (err) {
@@ -17,5 +17,5 @@ exported.update =  async function (req, callback) {
     }finally{
         if(connection) connection.release();
     }
-  }
-  module.exports = exported;
+}
+module.exports = exported;
