@@ -123,7 +123,7 @@
 			</div>
 			<div class="tr_paybox">
 				<input  type="submit" id="submit" value="确认支付" class="tr_pay am-btn" />
-				<input  type="button" value="返回" class="tr_pay am-btn" onclick="location.href = '/account/balance'"/>
+				<input  type="button" value="返回" class="tr_pay am-btn" onclick="location.href = 'http://localhost:3030/balance'"/>
 			</div>
 		</form>
 	</div>
@@ -159,7 +159,11 @@
 	console.log(b);
 	console.log(Card);
 	console.log(Pwd);
-	if(Card =='123456' && Pwd=='123456')
+	if(a<10||a>10000)
+	{
+		alert("金额在10-10000之间！")
+	}
+	else if(Card =='123456' && Pwd=='123456')
 	{
 	$.ajax({
         dataType: "JSON",

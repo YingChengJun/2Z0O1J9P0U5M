@@ -103,8 +103,10 @@ exported.hotel_order_info_manager = async (req, res, callback) => {
 			case '1': sql = sql + "order by hotelStar "; break;
 			case '2': sql = sql + "order by roomAllowance "; break;
 			case '3': sql = sql + "order by hotelScore "; break;
+			case '4': sql = sql; break;
 			default:  break;
 		}
+		console.log(selector);
 		if (timer == 1) {
 			if(selector == 2 || selector == 4) sql = sql + ";";
 			else sql = sql + "desc;";
@@ -353,7 +355,7 @@ exported.flight_order_info = async (req, res, callback) => {
 			sql="select flightName,flightCompany,landingPlace,departurePlace,landingTime,departureTime,flightPrice as flightPrice from new_table order by flightPrice ";
 		}
 		if (timer == 1) {
-			if(selector == 2) sql = sql + ";";
+			if(selector == 2 || selector == 4) sql = sql + ";";
 			else sql = sql + "desc;";
 		} else {
 			if(selector == 2) sql = sql + "desc;";
@@ -389,7 +391,7 @@ exported.flight_order_info_manager = async (req, res, callback) => {
 			default:  break;
 		}
 		if (timer == 1) {
-			if(selector == 2) sql = sql + ";";
+			if(selector == 2 || selector == 4) sql = sql + ";";
 			else sql = sql + "desc;";
 		} else {
 			if(selector == 2) sql = sql + "desc;";
