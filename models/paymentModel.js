@@ -50,7 +50,7 @@ exported.select_seller_orders = async (req, res, callback) => {
 		let selector = req.query.selector; //GET方式获取参数
 		let timer = req.query.timerange;  //GET方式获取参数
 		let seller_id = req.session.token.uid;  //之后可能会修改
-		let sql = "select order_id, S.username as seller_name, seller_id, buyer_id, goods_name, price, current_status,\
+		let sql = "select order_id, S.username as seller_name, T.username as buyer_name ,  seller_id, buyer_id, goods_name, price, current_status,\
 				created_time, refund_reason, refund_time, refund_status, complain, complain_time from order_form, user as S,\
 				user as T where S.id = order_form.seller_id and T.id = order_form.buyer_id and seller_id = ? ";
 		switch (timer) {
