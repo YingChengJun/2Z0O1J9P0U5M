@@ -168,7 +168,7 @@ exported.comp_info = async function(){
                   }
               }
               else if(dealRcd[0].length==1){
-                if(buyer_id==Rcd[0].buyer_id){
+                if(buyer_id==Rcd[0].from_id){
                   if(price==Rcd[0].amount){
                     param3=[1,param1];
                     await connection.query(sqlUD,param3,function(err,rows){
@@ -252,7 +252,7 @@ exported.comp_info = async function(){
                   }
               }
               else if(dealRcd[0].length==1){
-                  if(buyer_id==Rcd[0].buyer_id){
+                  if(buyer_id==Rcd[0].from_id){
                     if(price==Rcd[0].amount){
                       param2=[2,param1];
                       param3=[2,param1];
