@@ -242,13 +242,13 @@
 		        <div class="card-block">
 		        	<form class="form" action="/payment/complain" method="post">
 		        		<div class="form-body">
-		        			<textarea name="complain" class="form-control square" rows="5" maxlength="200"><%= details.complain %> </textarea>
+		        			<textarea name="complain" class="form-control square" rows="5" maxlength="200" id="ca"><%= details.complain %> </textarea>
 		        			<br/>
 		        			<% if (details.complain_time) { %>
 		        				<label class=""><strong>上次投诉时间：</strong><%= dateFormat(details.complain_time) %></label>
 		        			<% } %>
 		        			<div class="form-actions center">
-		        				<button class="btn btn-success btn-outline-primary" type="submit">提交投诉理由</button>
+		        				<button class="btn btn-success btn-outline-primary" type="submit" onclick="return check()">提交投诉理由</button>
 		        				<input type="hidden" name="pos" value="<%= session %>">
 		        			</div>
 		        		</div>
@@ -315,6 +315,13 @@
         }
   		});
   	});
+    function check() {
+      if ($("#ca").val() == "") {
+        alert("投诉理由不能为空！");
+        return false;
+      }
+      return true;
+    }
   </script>
 
 </body>
